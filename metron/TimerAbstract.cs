@@ -9,20 +9,15 @@ namespace metron
     abstract class TimerAbstract
     {
 
-        public event EventHandler Tick;
 
+        public abstract event EventHandler TimerTick;
         public abstract void Start();
         public abstract void Stop();
-
+        
         #region Events
-        void Metronome_Tick(object sender, EventArgs e)
-        {
 
-            this.Tick.Invoke(this, e);
-
-
-        }
         #endregion
+
         
 
         #region Properties

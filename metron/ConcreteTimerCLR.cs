@@ -10,11 +10,13 @@ namespace metron
     class ConcreteTimerCLR : TimerAbstract
     {
         private DispatcherTimer timer; // clr timer
-        public event EventHandler Tick;
+        public override event EventHandler TimerTick;
+
 
         public ConcreteTimerCLR()
         {
             timer = new DispatcherTimer(DispatcherPriority.Send); //creating timer with max priority
+            
             timer.Tick += new EventHandler(Metronome_Tick);
         }
         public override void Start()
@@ -35,8 +37,8 @@ namespace metron
         void Metronome_Tick(object sender, EventArgs e)
         {
 
-            this.Tick.Invoke(this,e);
 
+            TimerTick?.Invoke(this, e);
 
         }
         #endregion

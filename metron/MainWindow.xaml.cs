@@ -29,14 +29,6 @@ namespace metron
             InitializeComponent();
 
             DataContext = new MetronomeViewModel();
-
-            /*
-            Slider_BPM.Value = 100;
-            this.TextBox_BPM.Text = "100";
-
-            Metronome = MetronomeModel.GetInstance("1000");
-            this.TextBox_Pattern.Text = Metronome.MetronomePattern;
-            */
             
 
         }

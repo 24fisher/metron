@@ -9,7 +9,8 @@ namespace metron
     class ConcreteTimerWin32 : TimerAbstract
     {
         private MMTimer timer; // clr timer
-        public event EventHandler Tick;
+        public override event EventHandler TimerTick;
+
 
         /*public ConcreteTimerWin32()
         {

@@ -17,7 +17,7 @@ namespace metron
     {
 
         #region Fields
-        //private static MetronomeModel instance; //singletone instance
+
         private TimerAbstract timer; // system.threading timer
         /// <summary>
         /// pattern char: '1';
@@ -42,13 +42,11 @@ namespace metron
 
 
 
-        public MetronomeModel(TimerAbstract timerImplementor)
-            : base(timerImplementor)
+        public MetronomeModel(TimerAbstract timerImplementor) : base(timerImplementor)
         {
-            timer = new ConcreteTimerCLR();
+            timer = timerImplementor; // setting timer type from abstract class
 
-
-            timer.Tick += new EventHandler(Metronome_Tick);
+            timer.TimerTick += new EventHandler(Metronome_Tick);
             metronomePattern = new Pattern(0, "1000");
             this.SetMeasure();
             Tempo = 100;
@@ -93,10 +91,6 @@ namespace metron
 
             metronomePattern += 1;
 
-            
-
-
-
             //MessageBox.Show("Tada!");
             //SystemSounds.Hand.Play();
 
@@ -117,11 +111,11 @@ namespace metron
         /// </summary>
         /// <param name="bpm">beats per minute input</param>
         /// <returns></returns>
-        public void Run(int bpm)
+        public override void StartTimer()
         {
+            
             timer.Stop();
-            Tempo = bpm;
-            timer.Interval = TimeSpan.FromMilliseconds(60000 / bpm);
+            timer.Interval = TimeSpan.FromMilliseconds(60000 / Tempo);
             base.StartTimer();
             IsRunning = true;
             
@@ -130,8 +124,9 @@ namespace metron
         /// Timer stop
         /// </summary>
         /// <returns></returns>
-        public void Stop()
+        public override void StopTimer()
         {
+        
             base.StopTimer();
             IsRunning = false;
         }
@@ -191,8 +186,8 @@ namespace metron
             set
             {
                 metronomePattern.PatternString = value;
-                this.Stop();
-                this.Run(Tempo);
+                this.StopTimer();
+                this.StartTimer();
             }
         }
         public string TempoDescription
@@ -223,7 +218,8 @@ namespace metron
 
             }
         }
-        public bool IsRunning { get; set; }
+        //public bool IsRunning { get; set; }
+
         public int Tempo
         {
             get
@@ -235,7 +231,7 @@ namespace metron
                 tempo = value;
                 this.SetTempoDescription();
                 
-                OnPropertyChanged("Tempo");
+                OnPropertyChanged(nameof(Tempo));
             }
         }
         public string Pattern
@@ -248,7 +244,7 @@ namespace metron
             {
                 metronomePattern.PatternString = value;
                 this.SetMeasure();
-                OnPropertyChanged("Pattern");
+                OnPropertyChanged(nameof(Pattern));
             }
             
         }

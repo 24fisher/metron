@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace metron
 {
-    class MetronomeModelAbstraction
+    abstract class MetronomeModelAbstraction
     {
 
         protected TimerAbstract timerImplementor = null;
@@ -19,13 +19,15 @@ namespace metron
 
         public bool IsRunning { get; internal set; }
 
-        public void StartTimer()
+        public virtual void StartTimer()
         {
             timerImplementor.Start();
         }
-        public void StopTimer()
+
+        public virtual void StopTimer()
         {
             timerImplementor.Stop();
         }
+
     }
 }

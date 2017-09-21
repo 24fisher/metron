@@ -22,7 +22,7 @@ namespace metron
         {
             implementorTimer = new ConcreteTimerCLR(); //Here we choose timer class to use
             metronome = new MetronomeModel(implementorTimer);
-            //OnPropertyChanged("MetronomeViewModel");
+            OnPropertyChanged("MetronomeViewModel");
 
         }
         #endregion
@@ -78,7 +78,7 @@ namespace metron
             set
             {
                 metronome = value;
-                //OnPropertyChanged("Metronome");
+                OnPropertyChanged("Metronome");
             }
         }
         #endregion
