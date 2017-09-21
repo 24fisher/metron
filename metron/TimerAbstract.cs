@@ -24,6 +24,7 @@ namespace metron
         }
         #endregion
         
+
         #region Properties
         public abstract TimeSpan Interval { get; set; }
         #endregion
