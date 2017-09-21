@@ -1,0 +1,46 @@
+﻿<Window x:Class="metron.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:metron"
+        mc:Ignorable="d"
+        Title="Metron v1.0" Height="350" Width="579">
+    <DockPanel LastChildFill="True" Margin="0,0,0,0">
+        <Grid  DockPanel.Dock="Top" Height="46" ShowGridLines="True" Background="LightBlue">
+            <StackPanel DataContext="{Binding Metronome}"  DockPanel.Dock="Top" Height="50" Width="Auto"  Background="LightBlue" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Ellipse Fill ="{Binding TickVisualization, UpdateSourceTrigger=PropertyChanged}" Name="EclipseTick"  Width="40" Height="40" Margin="0,3"/>
+            </StackPanel>
+        </Grid>
+        <Grid DataContext="{Binding Metronome}" DockPanel.Dock="Top" Height="46" ShowGridLines="True" Background="AliceBlue">
+            <TextBox Text ="{Binding Tempo, UpdateSourceTrigger=PropertyChanged}" Name="TextBox_BPM" Grid.Row="0" Grid.Column="0" Width="100" Margin="208,11,209,10" />
+
+        </Grid>
+        <Grid DataContext="{Binding Metronome}"  DockPanel.Dock="Top" Height="104" ShowGridLines="True" Background="AliceBlue">
+            <Slider Value ="{Binding Tempo, UpdateSourceTrigger=PropertyChanged}" Name="Slider_BPM" HorizontalAlignment="Center" Margin="46,10,0,0" VerticalAlignment="Top" Width="422" Maximum="300" Minimum="60" ValueChanged="Slider_ValueChanged"/>
+            <Button Grid.Row="0"  Content="Start" Height="20" VerticalAlignment="Top" Width="75"  Click="Button_Click_Start" Margin="221,31,221,0"/>
+            <Button Content="Stop"  Margin="221,56,221,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Stop" />
+
+        </Grid>
+
+
+
+
+        <Grid   DataContext="{Binding Metronome}" DockPanel.Dock="Top" Height="55" ShowGridLines="True" Background="AliceBlue">
+            <TextBox Text ="{Binding Pattern, UpdateSourceTrigger=PropertyChanged}" Name="TextBox_Pattern" Grid.Row="0" Grid.Column="0" Width="100" Margin="235,11,236,19" />
+            <Button Content="Change pattern" Grid.Row="0"  Margin="340,16,0,0" VerticalAlignment="Top" Width="102" Click="Button_Click_Pattern"/>
+            <TextBlock Text ="{Binding Measure, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="122,11,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="25" Width="71"/>
+
+        </Grid>
+
+        <Grid DataContext="{Binding Metronome}" DockPanel.Dock="Bottom"   Height="66" Background="LightBlue">
+            <TextBlock Text ="{Binding TempoDescription, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="19,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+        </Grid>
+
+
+    </DockPanel>
+
+
+
+</Window>
