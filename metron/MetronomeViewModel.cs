@@ -15,6 +15,7 @@ namespace metron
         #region Fields
         private MetronomeModelAbstraction metronome;
         private TimerAbstract implementorTimer;
+
         #endregion
         #region Constructor
         public MetronomeViewModel()
