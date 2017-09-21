@@ -27,6 +27,7 @@ namespace metron
             timer.Stop();
         }
 
+
         public override TimeSpan Interval { get { return timer.Interval; }  set { timer.Interval = value; } }
         
 
