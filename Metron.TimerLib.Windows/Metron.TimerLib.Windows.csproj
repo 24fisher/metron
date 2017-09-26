@@ -48,7 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Metron.MetronomeModelCore1\Metron.MetronomeModelCore.csproj">
+    <ProjectReference Include="..\Metron.MetronomeModelCore\Metron.MetronomeModelCore.csproj">
       <Project>{7c9d668a-42eb-411b-9968-b9252aefefc3}</Project>
       <Name>Metron.MetronomeModelCore</Name>
     </ProjectReference>

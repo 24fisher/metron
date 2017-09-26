@@ -123,11 +123,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Metron.MetronomeModelCore1\Metron.MetronomeModelCore.csproj">
+    <ProjectReference Include="..\Metron.MetronomeModelCore\Metron.MetronomeModelCore.csproj">
       <Project>{7c9d668a-42eb-411b-9968-b9252aefefc3}</Project>
       <Name>Metron.MetronomeModelCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Metron.TimerLib.Windows1\Metron.TimerLib.Windows.csproj">
+    <ProjectReference Include="..\Metron.TimerLib.Windows\Metron.TimerLib.Windows.csproj">
       <Project>{e23cda70-6bf0-4acf-906b-15b2461af772}</Project>
       <Name>Metron.TimerLib.Windows</Name>
     </ProjectReference>

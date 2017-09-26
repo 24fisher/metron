@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metron.Android", "MetronAndroid\Metron.Android.csproj", "{2B6AF1E3-E735-4310-97D3-FEE0D139654C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metron.TimerLib.Windows", "Metron.TimerLib.Windows1\Metron.TimerLib.Windows.csproj", "{E23CDA70-6BF0-4ACF-906B-15B2461AF772}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metron.TimerLib.Windows", "Metron.TimerLib.Windows\Metron.TimerLib.Windows.csproj", "{E23CDA70-6BF0-4ACF-906B-15B2461AF772}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metron.MetronomeModelCore", "Metron.MetronomeModelCore1\Metron.MetronomeModelCore.csproj", "{7C9D668A-42EB-411B-9968-B9252AEFEFC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metron.MetronomeModelCore", "Metron.MetronomeModelCore\Metron.MetronomeModelCore.csproj", "{7C9D668A-42EB-411B-9968-B9252AEFEFC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
