@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace metron
+namespace Metron
 {
-    abstract class MetronomeModelAbstraction
+    public abstract class MetronomeModelAbstraction
     {
 
         protected TimerAbstract timerImplementor = null;

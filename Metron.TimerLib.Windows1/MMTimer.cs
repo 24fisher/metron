@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace metron
+namespace Metron
 {
     public class MMTimer : IDisposable
     {
@@ -16,10 +16,13 @@ namespace metron
         private bool _enabled;
         private int _interval;
         private uint _timerId;
+        private int resolution;
+
         public MMTimer()
         {
             Callback = TimerCallbackMethod;
-            Interval = 20;
+            Resolution = 0;//0 - max res
+            Interval = 10;
         }
         public bool Enabled
         {
@@ -28,9 +31,13 @@ namespace metron
             {
                 _enabled = value;
                 if (value)
+                {
                     Start();
+                }
                 else
+                {
                     Stop();
+                }
             }
         }
         public int Interval
@@ -43,9 +50,36 @@ namespace metron
                 if (value < 0)
                     throw new Exception("Interval must be greater then 0.");
                 _interval = value;
+                
+                if (Resolution > Interval)
+                    Resolution = value;
             }
         }
         public bool IsRunning => _timerId != 0;
+
+        // Note minimum resolution is 0, meaning highest possible resolution.
+        public int Resolution
+        {
+            get
+            {
+                return resolution;
+            }
+            set
+            {
+                CheckDisposed();
+
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("value");
+
+                resolution = value;
+            }
+        }
+        private void CheckDisposed()
+        {
+            if (_disposed)
+                throw new ObjectDisposedException("MultimediaTimer");
+        }
+
         public void Dispose()
         {
             Dispose(true);
@@ -62,7 +96,7 @@ namespace metron
             if (IsRunning)
                 throw new InvalidOperationException("Timer is already running.");
             uint user = 0;
-            _timerId = TimeSetEvent((uint)Interval, 0, Callback, ref user, 1);
+            _timerId = TimeSetEvent((uint)Interval, (uint)Resolution, Callback, ref user, 1);
             if (_timerId != 0)
                 return;
             var error = Marshal.GetLastWin32Error();

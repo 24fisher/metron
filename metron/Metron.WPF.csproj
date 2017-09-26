@@ -6,13 +6,14 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2641BC03-DAFB-4337-AABC-76F450DC0E1F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>metron</RootNamespace>
-    <AssemblyName>metron</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>MetronWPF</RootNamespace>
+    <AssemblyName>MetronWPF</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,9 +26,9 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -69,15 +70,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ConcreteTimerWin32.cs" />
-    <Compile Include="MetronomeModelAbstraction.cs" />
-    <Compile Include="MMTimer.cs" />
-    <Compile Include="TempoXML.cs" />
-    <Compile Include="MetronomeViewModel.cs" />
-    <Compile Include="Notifier.cs" />
-    <Compile Include="TickTack.cs" />
-    <Compile Include="TimerAbstract.cs" />
-    <Compile Include="ConcreteTimerCLR.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,8 +84,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MetronomeModel.cs" />
-    <Compile Include="Pattern.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -131,6 +121,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Metron.MetronomeModelCore1\Metron.MetronomeModelCore.csproj">
+      <Project>{7c9d668a-42eb-411b-9968-b9252aefefc3}</Project>
+      <Name>Metron.MetronomeModelCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Metron.TimerLib.Windows1\Metron.TimerLib.Windows.csproj">
+      <Project>{e23cda70-6bf0-4acf-906b-15b2461af772}</Project>
+      <Name>Metron.TimerLib.Windows</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

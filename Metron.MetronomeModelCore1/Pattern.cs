@@ -1,4 +1,4 @@
-﻿namespace metron
+﻿namespace Metron
 {
     public class Pattern
     {

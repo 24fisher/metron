@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 
 
-namespace metron
+namespace Metron
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
@@ -28,7 +28,8 @@ namespace metron
         {
             InitializeComponent();
 
-            DataContext = new MetronomeViewModel();
+            var implementorTimer = new ConcreteTimerWin32();
+            DataContext = new MetronomeViewModel(implementorTimer);
             
 
         }

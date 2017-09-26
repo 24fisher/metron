@@ -6,25 +6,29 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Windows;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
-namespace metron
+namespace Metron
 {
-    class MetronomeViewModel : INotifyPropertyChanged
+    public class MetronomeViewModel : INotifyPropertyChanged
     {
 
         #region Fields
         private MetronomeModelAbstraction metronome;
         private TimerAbstract implementorTimer;
 
+
         #endregion
         #region Constructor
-        public MetronomeViewModel()
+        public MetronomeViewModel(TimerAbstract implementorTimer)
         {
-            implementorTimer = new ConcreteTimerCLR(); //Here we choose timer class to use
+             /*ConcreteTimerCLR();*/ //Here we choose timer class to use
             metronome = new MetronomeModel(implementorTimer);
             OnPropertyChanged("MetronomeViewModel");
 
         }
+
+
         #endregion
         #region Public members
         public void Run()
@@ -36,7 +40,7 @@ namespace metron
             }
             catch (Exception)
             {
-                MessageBox.Show("Please, enter number between 60 and 300");
+                //MessageBox.Show("Error!");
             }
         }
 

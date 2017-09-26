@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Threading;
-using System.Media;
 using System.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
+using System.Threading;
 
-namespace metron
+
+namespace Metron
 {
 
     class MetronomeModel: MetronomeModelAbstraction, INotifyPropertyChanged 
@@ -18,15 +18,15 @@ namespace metron
 
         #region Fields
 
-        private TimerAbstract timer; // system.threading timer
+        private TimerAbstract timer; // timer
         /// <summary>
         /// pattern char: '1';
         /// </summary>
-        private SoundPlayer metronomeTick;
+        //private SoundPlayer metronomeTick;
         /// <summary>
         /// pattern char: '0';
         /// </summary>
-        private SoundPlayer metronomeTack; 
+        //private SoundPlayer metronomeTack; 
         private Pattern metronomePattern;
         private int tempo;
         private string tickVisualization;
@@ -54,14 +54,15 @@ namespace metron
             try
             {
 
-                metronomeTack = new SoundPlayer("metronome-tick2.wav"); //Metronome ticking s
-                metronomeTack.Load();
-                metronomeTick = new SoundPlayer("sticks.wav"); //Metronome ticking s
-                metronomeTick.Load();
+                //metronomeTack = new SoundPlayer("metronome-tick2.wav"); //Metronome ticking s
+                //metronomeTack.Load();
+                //metronomeTick = new SoundPlayer("sticks.wav"); //Metronome ticking s
+               //metronomeTick.Load();
             }
             catch (System.IO.FileNotFoundException e)
             {
-                MessageBox.Show(e.Message);
+                //TODO: Imlplement universal message box
+                //MessageBox.Show(e.Message);
             }
         }
         #endregion
@@ -69,23 +70,35 @@ namespace metron
         #region Events
         void Metronome_Tick(object sender, EventArgs e)
         {
+            Console.Beep(5000, 70);
+            //if ((TickTack)(int)Char.GetNumericValue(metronomePattern.CurrentTick) == TickTack.metronomeTick)
+            //{
+            //    Console.Beep(5000, 100);
+            //    //TickVisualization = "Red";
+            //}
+            //if ((TickTack)(int)Char.GetNumericValue(metronomePattern.CurrentTick) == TickTack.metronomeTack)
+            //{
+            //    Console.Beep(4000, 100);
+            //    //TickVisualization = "Green";
+            //}
+
+
+            //// Создание вторичного потока.
+            //Thread th = new Thread(DoWork);
+            //th.Start();
+            ////MessageBox.Show(Thread.CurrentThread.GetHashCode().ToString());
+
+
+        }
+        private void DoWork()
+        {
 
             //metronomeTick.Play();
             //metronomeTack.Play();
             //Console.Beep(5000, 100);
             //Console.Beep(4000, 100);
-            if ((TickTack)(int)Char.GetNumericValue(metronomePattern.CurrentTick) == TickTack.metronomeTick)
-            {
-                Console.Beep(5000, 100);
-                //TickVisualization = "Red";
-            }
-            if ((TickTack)(int)Char.GetNumericValue(metronomePattern.CurrentTick) == TickTack.metronomeTack)
-            {
-                Console.Beep(4000, 100);
-                //TickVisualization = "Green";
-            }
-
-            if(metronomePattern.CurrentTickIndex % 2 == 0)
+            
+            if (metronomePattern.CurrentTickIndex % 2 == 0)
                 TickVisualization = "Red";
             else TickVisualization = "Green";
 
@@ -93,7 +106,6 @@ namespace metron
 
             //MessageBox.Show("Tada!");
             //SystemSounds.Hand.Play();
-
 
         }
 
@@ -178,10 +190,7 @@ namespace metron
         #region Properties
         public string MetronomePattern
         {
-            get
-            {
-                return metronomePattern.PatternString;
-            }
+            get => metronomePattern.PatternString;
 
             set
             {
@@ -192,10 +201,7 @@ namespace metron
         }
         public string TempoDescription
         {
-            get
-            {
-                return tempoDescription;
-            }
+            get => tempoDescription;
 
             set
             {
@@ -206,10 +212,7 @@ namespace metron
         }
         public string Measure
         {
-            get
-            {
-                return measure;
-            }
+            get => measure;
 
             set
             {
@@ -222,10 +225,7 @@ namespace metron
 
         public int Tempo
         {
-            get
-            {
-                return tempo;
-            }
+            get => tempo;
             set
             {
                 tempo = value;
@@ -236,10 +236,7 @@ namespace metron
         }
         public string Pattern
         {
-            get
-            {
-                return metronomePattern.PatternString;
-            }
+            get => metronomePattern.PatternString;
             set
             {
                 metronomePattern.PatternString = value;
@@ -253,10 +250,7 @@ namespace metron
 
         public string TickVisualization
         {
-            get
-            {
-                return tickVisualization;
-            }
+            get => tickVisualization;
             set
             {
                 tickVisualization = value;

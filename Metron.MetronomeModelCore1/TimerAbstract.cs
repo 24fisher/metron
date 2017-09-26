@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace metron
+namespace Metron
 {
-    abstract class TimerAbstract
+    public abstract class TimerAbstract
     {
 
 

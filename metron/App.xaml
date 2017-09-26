@@ -1,7 +1,7 @@
-﻿<Application x:Class="metron.App"
+﻿<Application x:Class="Metron.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:metron"
+             xmlns:local="clr-namespace:Metron"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
