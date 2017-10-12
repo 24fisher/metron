@@ -5,7 +5,14 @@
         private Pattern() { }
         public Pattern(int currentTickIndex, string patternString)
         {
+            if (patternString == "")
+            {
+                patternString = "1";
+                currentTickIndex = 0;
+            }
+            
             PatternString = patternString;
+
             if (currentTickIndex < PatternString.Length)
             {
                 CurrentTickIndex = currentTickIndex;

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ConcreteTimerCLR.cs" />
     <Compile Include="ConcreteTimerWin32.cs" />
+    <Compile Include="ConcreteXamarinTimer.cs" />
     <Compile Include="MMTimer.cs" />
     <Compile Include="MultimediaTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

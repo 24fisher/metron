@@ -10,19 +10,23 @@ using System.Threading;
 
 namespace Metron
 {
+    /// <summary>
+    /// Metronome view model class. Receives timer implementor abstract object in constructor. 
+    /// Provides interaction with abstract timer object
+    /// </summary>
     public class MetronomeViewModel : INotifyPropertyChanged
     {
 
         #region Fields
         private MetronomeModelAbstraction metronome;
-        private TimerAbstract implementorTimer;
+        //private TimerAbstract implementorTimer;
 
 
         #endregion
         #region Constructor
         public MetronomeViewModel(TimerAbstract implementorTimer)
         {
-             /*ConcreteTimerCLR();*/ //Here we choose timer class to use
+             
             metronome = new MetronomeModel(implementorTimer);
             OnPropertyChanged("MetronomeViewModel");
 
@@ -40,7 +44,8 @@ namespace Metron
             }
             catch (Exception)
             {
-                //MessageBox.Show("Error!");
+                throw new InvalidOperationException("Timer has not been started.");
+
             }
         }
 

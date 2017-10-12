@@ -17,9 +17,7 @@ using System.Diagnostics;
 
 namespace Metron
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
         
@@ -28,13 +26,26 @@ namespace Metron
         {
             InitializeComponent();
 
+
+
+            /// <summary>
+            /// Here we choose timer class to use:
+            /// 
+            /// ConcreteTimerWin32
+            /// ConcreteXamarinTimer
+            /// ConcreteTimerCLR
+            /// </summary>
+
             var implementorTimer = new ConcreteTimerWin32();
             DataContext = new MetronomeViewModel(implementorTimer);
-            
 
+            
+            //Setting window position
+            Left = MetronWPF.Properties.Settings.Default.WindowPosition.Left;
+            Top = MetronWPF.Properties.Settings.Default.WindowPosition.Top;
         }
 
-
+        #region Events
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             ((MetronomeViewModel)DataContext)?.TempoSliderMoved();
@@ -58,6 +69,42 @@ namespace Metron
 
             
         }
+        #endregion
+
+        #region Textbox input filter
+        private void TextBox_Pattern_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            
+
+
+            if (!Int32.TryParse(e.Text, out int value))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                if(!(e.Text.Equals("0") || e.Text.Equals("1")))
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void TextBox_Pattern_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+            MetronWPF.Properties.Settings.Default.WindowPosition = this.RestoreBounds;
+            MetronWPF.Properties.Settings.Default.Save();
+        }
+        #endregion
 
 
     }

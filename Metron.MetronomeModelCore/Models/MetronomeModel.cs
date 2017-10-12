@@ -12,8 +12,11 @@ using System.Threading;
 
 namespace Metron
 {
-
-    class MetronomeModel: MetronomeModelAbstraction, INotifyPropertyChanged 
+    /// <summary>
+    /// Metronome model class. Receives timer implementor object in constructor. 
+    /// Contains tick event. Supports WPF binding.
+    /// </summary>
+    class MetronomeModel : MetronomeModelAbstraction, INotifyPropertyChanged 
     {
 
         #region Fields
@@ -59,7 +62,7 @@ namespace Metron
                 //metronomeTick = new SoundPlayer("sticks.wav"); //Metronome ticking s
                //metronomeTick.Load();
             }
-            catch (System.IO.FileNotFoundException e)
+            catch (System.IO.FileNotFoundException )
             {
                 //TODO: Imlplement universal message box
                 //MessageBox.Show(e.Message);
@@ -70,44 +73,27 @@ namespace Metron
         #region Events
         void Metronome_Tick(object sender, EventArgs e)
         {
-            Console.Beep(5000, 70);
-            //if ((TickTack)(int)Char.GetNumericValue(metronomePattern.CurrentTick) == TickTack.metronomeTick)
-            //{
-            //    Console.Beep(5000, 100);
-            //    //TickVisualization = "Red";
-            //}
-            //if ((TickTack)(int)Char.GetNumericValue(metronomePattern.CurrentTick) == TickTack.metronomeTack)
-            //{
-            //    Console.Beep(4000, 100);
-            //    //TickVisualization = "Green";
-            //}
+            //Console.Beep(5000, 70);
+            if ((TickTack)(int)Char.GetNumericValue(metronomePattern.CurrentTick) == TickTack.metronomeTick)
+            {
+                Console.Beep(5000, 100);
+                TickVisualization = "Red";
+            }
+            if ((TickTack)(int)Char.GetNumericValue(metronomePattern.CurrentTick) == TickTack.metronomeTack)
+            {
+                Console.Beep(4000, 100);
+                TickVisualization = "Green";
+            }
 
 
-            //// Создание вторичного потока.
-            //Thread th = new Thread(DoWork);
-            //th.Start();
-            ////MessageBox.Show(Thread.CurrentThread.GetHashCode().ToString());
-
-
-        }
-        private void DoWork()
-        {
-
-            //metronomeTick.Play();
-            //metronomeTack.Play();
-            //Console.Beep(5000, 100);
-            //Console.Beep(4000, 100);
-            
             if (metronomePattern.CurrentTickIndex % 2 == 0)
                 TickVisualization = "Red";
             else TickVisualization = "Green";
 
             metronomePattern += 1;
 
-            //MessageBox.Show("Tada!");
-            //SystemSounds.Hand.Play();
-
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
@@ -142,25 +128,22 @@ namespace Metron
             base.StopTimer();
             IsRunning = false;
         }
-        /// <summary>
-        /// Accesing singletone instance 
-        /// </summary>
-        /// <param name="pattern">string that represents beats pattern</param>
-        /// <returns></returns>
-        /*public static MetronomeModel GetInstance(string pattern) 
-        {
-            if (instance == null)
-                instance = new MetronomeModel(pattern);
-            return instance;
-        }*/
+        
 
         #endregion
+
         #region Private members
 
         private void SetTempoDescription()
         {
             TempoDescription = "";
-            XDocument xdoc = XDocument.Load("tempos_edited.xml");
+            XDocument xdoc;
+            try
+            {
+                xdoc = XDocument.Load("tempos_edited.xml");
+            }
+            catch (Exception)
+            { return; }
 
             var items = from xe in xdoc.Element("tempos").Elements("tempo")
                         where ((Convert.ToInt32(xe.Element("lower_limit").Value) <= Tempo)  && (Convert.ToInt32(xe.Element("higher_limit").Value) >= Tempo))
@@ -221,7 +204,7 @@ namespace Metron
 
             }
         }
-        //public bool IsRunning { get; set; }
+        
 
         public int Tempo
         {

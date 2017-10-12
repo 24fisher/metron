@@ -14,11 +14,6 @@ namespace Metron
         public abstract void Start();
         public abstract void Stop();
         
-        #region Events
-
-        #endregion
-
-        
 
         #region Properties
         public abstract TimeSpan Interval { get; set; }

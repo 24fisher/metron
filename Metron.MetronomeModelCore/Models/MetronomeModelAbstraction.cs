@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Metron
 {
+    /// <summary>
+    /// Metronome abstract model class. Receives timer implementor abstract object in constructor. 
+    /// Provides interaction with abstract timer object
+    /// </summary>
     public abstract class MetronomeModelAbstraction
     {
 
