@@ -2,37 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Timers;
+using System.Threading.Tasks;
 
 
 
 
-using Metron;
 
-namespace MetronAndroid
+namespace Metron
 {
-    class ConcreteXamarinTimer : TimerAbstract
+    
+    public class ConcreteTimerWin32 : TimerAbstract
     {
-        private Timer timer;
-
-        
-
+        private MMTimer timer; // clr timer
         public override event EventHandler TimerTick;
 
+
+        public ConcreteTimerWin32()
+        {
+            timer = new MMTimer(); //creating timer with max priority
+            timer.Elapsed += new EventHandler(Metronome_Tick);
+        }
         public override void Start()
         {
-            timer = new Timer(); //creating timer with max priority
-            timer.Elapsed += Timer_Elapsed; ;
-        }
-
-        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            throw new NotImplementedException();
+            timer.Start();
         }
 
         public override void Stop()
         {
-            throw new NotImplementedException();
+            if(timer.IsRunning)
+                timer.Stop();
         }
 
         public override TimeSpan Interval
@@ -40,16 +38,20 @@ namespace MetronAndroid
             get { return TimeSpan.FromMilliseconds(timer.Interval); }
             set { timer.Interval = (int)value.TotalMilliseconds; }
         }
+        
+ 
+
 
         #region Events
         void Metronome_Tick(object sender, EventArgs e)
         {
 
+            this.TimerTick.Invoke(this, e);
 
-            TimerTick?.Invoke(this, e);
 
         }
         #endregion
         
     }
 }
+

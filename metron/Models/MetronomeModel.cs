@@ -8,94 +8,76 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using System.Threading;
+using System.Drawing;
+
 
 
 namespace Metron
 {
     /// <summary>
-    /// Metronome model class. Receives timer implementor object in constructor. 
+    /// Metronome model class. Receives timer and beep implementor objects in constructor. 
     /// Contains tick event. Supports WPF binding.
     /// </summary>
     class MetronomeModel : MetronomeModelAbstraction, INotifyPropertyChanged 
-    {
+    { 
 
         #region Fields
-
-        private TimerAbstract timer; // timer
-        /// <summary>
-        /// pattern char: '1';
-        /// </summary>
-        //private SoundPlayer metronomeTick;
-        /// <summary>
-        /// pattern char: '0';
-        /// </summary>
-        //private SoundPlayer metronomeTack; 
+        private TimerAbstract timer;
+        private MetromomeBeep beep;
         private Pattern metronomePattern;
         private int tempo;
         private string tickVisualization;
         private string tempoDescription;
         private string measure;
-
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Constructor
         /// <summary>
-        /// Adding click pattern 
+        /// constructor
         /// </summary>
-
-
-
-        public MetronomeModel(TimerAbstract timerImplementor) : base(timerImplementor)
+        /// <param name="timerImplementor">abstract timer object</param>
+        public MetronomeModel(TimerAbstract timerImplementor, MetromomeBeep beepImplementor) : base(timerImplementor, beepImplementor)
         {
             timer = timerImplementor; // setting timer type from abstract class
+            beep = beepImplementor; // setting beep type from abstract class
 
             timer.TimerTick += new EventHandler(Metronome_Tick);
-            metronomePattern = new Pattern(0, "1000");
+
+            metronomePattern = new Pattern();
             this.SetMeasure();
             Tempo = 100;
-            TickVisualization = "FF26D456";
-            try
-            {
+            TickVisualization = Color.White.ToKnownColor().ToString();
 
-                //metronomeTack = new SoundPlayer("metronome-tick2.wav"); //Metronome ticking s
-                //metronomeTack.Load();
-                //metronomeTick = new SoundPlayer("sticks.wav"); //Metronome ticking s
-               //metronomeTick.Load();
-            }
-            catch (System.IO.FileNotFoundException )
-            {
-                //TODO: Imlplement universal message box
-                //MessageBox.Show(e.Message);
-            }
+            
+
         }
         #endregion
 
         #region Events
-        void Metronome_Tick(object sender, EventArgs e)
+        private void Metronome_Tick(object sender, EventArgs e)
         {
-            //Console.Beep(5000, 70);
+
             if ((TickTack)(int)Char.GetNumericValue(metronomePattern.CurrentTick) == TickTack.metronomeTick)
             {
-                Console.Beep(5000, 100);
-                TickVisualization = "Red";
+               
+                beep.DoHighBeep();
+                TickVisualization = Color.Red.ToKnownColor().ToString();
             }
             if ((TickTack)(int)Char.GetNumericValue(metronomePattern.CurrentTick) == TickTack.metronomeTack)
             {
-                Console.Beep(4000, 100);
-                TickVisualization = "Green";
+                beep.DoLowBeep();
+                TickVisualization = Color.Green.ToKnownColor().ToString();
             }
 
 
             if (metronomePattern.CurrentTickIndex % 2 == 0)
-                TickVisualization = "Red";
-            else TickVisualization = "Green";
+                TickVisualization = Color.Red.ToKnownColor().ToString();
+            else TickVisualization = Color.Green.ToKnownColor().ToString();
 
             metronomePattern += 1;
 
         }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
@@ -103,12 +85,6 @@ namespace Metron
         #endregion
 
         #region Public members
-
-        /// <summary>
-        /// Running timer; calculating bpm
-        /// </summary>
-        /// <param name="bpm">beats per minute input</param>
-        /// <returns></returns>
         public override void StartTimer()
         {
             
@@ -118,22 +94,15 @@ namespace Metron
             IsRunning = true;
             
         }
-        /// <summary>
-        /// Timer stop
-        /// </summary>
-        /// <returns></returns>
         public override void StopTimer()
         {
         
             base.StopTimer();
             IsRunning = false;
         }
-        
-
         #endregion
 
         #region Private members
-
         private void SetTempoDescription()
         {
             TempoDescription = "";
@@ -162,12 +131,10 @@ namespace Metron
                 }   
             }
         }
-
         private void SetMeasure()
         {
             Measure = Pattern.Length.ToString() + " / " + "4";
         }
-
         #endregion
 
         #region Properties
@@ -204,8 +171,6 @@ namespace Metron
 
             }
         }
-        
-
         public int Tempo
         {
             get => tempo;
@@ -228,9 +193,6 @@ namespace Metron
             }
             
         }
-
-        
-
         public string TickVisualization
         {
             get => tickVisualization;

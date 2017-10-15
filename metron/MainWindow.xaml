@@ -6,11 +6,17 @@
         xmlns:local="clr-namespace:Metron"
         mc:Ignorable="d"
         Title="Metron v1.0" Height="347.017" Width="637.665" Closing="Window_Closing">
-    <DockPanel LastChildFill="True" Margin="0,0,0,0">
+    <DockPanel VerticalAlignment="Stretch" LastChildFill="True" Margin="0,0,0,0">
+        <Grid DataContext="{Binding Metronome}" DockPanel.Dock="Top" Height="25" ShowGridLines="True" Background="LightBlue">
+            <ComboBox Text ="{Binding Tempo, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+
+
+        </Grid>
         <Grid  DockPanel.Dock="Top" Height="46" ShowGridLines="True" Background="LightBlue">
             <StackPanel DataContext="{Binding Metronome}"  DockPanel.Dock="Top" Height="50" Width="Auto"  Background="LightBlue" Orientation="Horizontal" HorizontalAlignment="Center">
                 <Ellipse Fill ="{Binding TickVisualization, UpdateSourceTrigger=PropertyChanged}" Name="EclipseTick"  Width="40" Height="40" Margin="0,3"/>
             </StackPanel>
+            
         </Grid>
         <Grid DataContext="{Binding Metronome}" DockPanel.Dock="Top" Height="46" ShowGridLines="True" Background="AliceBlue">
             <TextBox Text ="{Binding Tempo, UpdateSourceTrigger=PropertyChanged}" Name="TextBox_BPM" Grid.Row="0" Grid.Column="0" Width="100" Margin="208,11,209,10" />

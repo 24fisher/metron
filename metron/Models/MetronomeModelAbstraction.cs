@@ -8,17 +8,19 @@ using System.Threading.Tasks;
 namespace Metron
 {
     /// <summary>
-    /// Metronome abstract model class. Receives timer implementor abstract object in constructor. 
+    /// Metronome abstract model class. Receives timer implementor abstract objects in constructor. 
     /// Provides interaction with abstract timer object
     /// </summary>
     public abstract class MetronomeModelAbstraction
     {
 
         protected TimerAbstract timerImplementor = null;
+        protected MetromomeBeep beepImplementor = null;
 
-        public MetronomeModelAbstraction(TimerAbstract timerImplementor)
+        public MetronomeModelAbstraction(TimerAbstract timerImplementor, MetromomeBeep beepImplementor)
         {
             this.timerImplementor = timerImplementor;
+            this.beepImplementor = beepImplementor;
         }
 
         public bool IsRunning { get; internal set; }

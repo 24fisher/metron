@@ -52,6 +52,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -70,6 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\MetronomeViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -84,6 +86,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Classes\Beeps\MetromomeBeep.cs" />
+    <Compile Include="Models\Classes\Beeps\MetronomeAudioFileBeep.cs" />
+    <Compile Include="Models\Classes\Beeps\MetronomeConsoleBeep.cs" />
+    <Compile Include="Models\Classes\Pattern.cs" />
+    <Compile Include="Models\Classes\Timers\ConcreteTimerCLR.cs" />
+    <Compile Include="Models\Classes\Timers\ConcreteTimerWin32.cs" />
+    <Compile Include="Models\Classes\Timers\ConcreteXamarinTimer.cs" />
+    <Compile Include="Models\Classes\Timers\MMTimer.cs" />
+    <Compile Include="Models\Classes\Timers\MultimediaTimer.cs" />
+    <Compile Include="Models\Classes\Timers\TimerAbstract.cs" />
+    <Compile Include="Models\Enums\TickTack.cs" />
+    <Compile Include="Models\MetronomeModel.cs" />
+    <Compile Include="Models\MetronomeModelAbstraction.cs" />
+    <Compile Include="Models\Structs\TempoXML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -122,14 +138,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Metron.MetronomeModelCore\Metron.MetronomeModelCore.csproj">
-      <Project>{7c9d668a-42eb-411b-9968-b9252aefefc3}</Project>
-      <Name>Metron.MetronomeModelCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Metron.TimerLib.Windows\Metron.TimerLib.Windows.csproj">
-      <Project>{e23cda70-6bf0-4acf-906b-15b2461af772}</Project>
-      <Name>Metron.TimerLib.Windows</Name>
-    </ProjectReference>
+    <None Include="bin\Debug\metronome-tick.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

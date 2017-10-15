@@ -3,7 +3,7 @@
     public class Pattern
     {
         private Pattern() { }
-        public Pattern(int currentTickIndex, string patternString)
+        public Pattern(int currentTickIndex = 0, string patternString = "1000")
         {
             if (patternString == "")
             {
@@ -27,8 +27,6 @@
 
         }
         public string PatternString { get;  set; } 
-
-
         public char CurrentTick { get; private set; } 
         public int CurrentTickIndex { get; set; } = 0;
         public static Pattern operator + (Pattern x, int y)

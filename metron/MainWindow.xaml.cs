@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 
 
+
 namespace Metron
 {
 
@@ -28,21 +29,30 @@ namespace Metron
 
 
 
-            /// <summary>
-            /// Here we choose timer class to use:
-            /// 
-            /// ConcreteTimerWin32
-            /// ConcreteXamarinTimer
-            /// ConcreteTimerCLR
-            /// </summary>
+            //
+            // Here we choose timer class to use:
+            // 
+            // ConcreteTimerWin32
+            // ConcreteXamarinTimer
+            // ConcreteTimerCLR
+            // 
+            // ..and Beep class to use:
+            //
+            //MetronomeAudioFileBeep
+            //MetronomeConsoleBeep
+            //
 
-            var implementorTimer = new ConcreteTimerWin32();
-            DataContext = new MetronomeViewModel(implementorTimer);
+            var timerImplementor = new ConcreteTimerWin32();
+            var beepImplementor = new MetronomeAudioFileBeep();
+
+            DataContext = new MetronomeViewModel(timerImplementor, beepImplementor);
 
             
             //Setting window position
             Left = MetronWPF.Properties.Settings.Default.WindowPosition.Left;
             Top = MetronWPF.Properties.Settings.Default.WindowPosition.Top;
+            
+            
         }
 
         #region Events

@@ -19,15 +19,14 @@ namespace Metron
 
         #region Fields
         private MetronomeModelAbstraction metronome;
-        //private TimerAbstract implementorTimer;
 
 
         #endregion
         #region Constructor
-        public MetronomeViewModel(TimerAbstract implementorTimer)
+        public MetronomeViewModel(TimerAbstract implementorTimer, MetromomeBeep beepImplementor)
         {
              
-            metronome = new MetronomeModel(implementorTimer);
+            metronome = new MetronomeModel(implementorTimer, beepImplementor);
             OnPropertyChanged("MetronomeViewModel");
 
         }
@@ -48,12 +47,10 @@ namespace Metron
 
             }
         }
-
         public void Stop()
         {
             Metronome.StopTimer();
         }
-
         public void ChangePattern()
         {
             if (Metronome.IsRunning)
@@ -62,7 +59,6 @@ namespace Metron
                 this.Run();
             }
         }
-
         public void TempoSliderMoved()
         {
             if (Metronome.IsRunning)
@@ -71,8 +67,8 @@ namespace Metron
                 this.Run();
             }
         }
-    
         #endregion
+
         #region Events
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
@@ -80,6 +76,7 @@ namespace Metron
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
         #endregion
+
         #region Properties
         public MetronomeModelAbstraction Metronome
         {
