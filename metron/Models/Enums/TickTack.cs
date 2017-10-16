@@ -1,4 +1,4 @@
 ﻿namespace Metron
 {
-    public enum TickTack { metronomeTack, metronomeTick }
+    public enum TickTack { MetronomeTack, MetronomeTick }
 }

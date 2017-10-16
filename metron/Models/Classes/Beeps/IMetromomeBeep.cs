@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Metron
 {
-    public abstract class MetromomeBeep
+    public interface IMetromomeBeep
     {
 
-        public abstract void DoHighBeep();
-        public abstract void DoLowBeep();
+        void PlayHighBeep();
+        void PlayLowBeep();
     }
 }

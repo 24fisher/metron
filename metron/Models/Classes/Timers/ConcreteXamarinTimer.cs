@@ -13,7 +13,7 @@ namespace Metron
 {
     class ConcreteXamarinTimer : TimerAbstract
     {
-        private Timer timer;
+        private Timer _timer;
 
         
 
@@ -21,8 +21,8 @@ namespace Metron
 
         public override void Start()
         {
-            timer = new Timer(); //creating timer with max priority
-            timer.Elapsed += Timer_Elapsed; ;
+            _timer = new Timer(); //creating timer with max priority
+            _timer.Elapsed += Timer_Elapsed; ;
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -37,8 +37,8 @@ namespace Metron
 
         public override TimeSpan Interval
         {
-            get { return TimeSpan.FromMilliseconds(timer.Interval); }
-            set { timer.Interval = (int)value.TotalMilliseconds; }
+            get { return TimeSpan.FromMilliseconds(_timer.Interval); }
+            set { _timer.Interval = (int)value.TotalMilliseconds; }
         }
 
         #region Events

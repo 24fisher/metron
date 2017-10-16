@@ -9,30 +9,30 @@ using System.Windows.Threading;
 
 namespace Metron
 {
-    class ConcreteTimerCLR : TimerAbstract
+    class ConcreteTimerClr : TimerAbstract
     {
-        private DispatcherTimer timer; // clr timer
+        private DispatcherTimer _timer; // clr timer
         public override event EventHandler TimerTick;
 
 
-        public ConcreteTimerCLR()
+        public ConcreteTimerClr()
         {
-            timer = new DispatcherTimer(DispatcherPriority.Send); //creating timer with max priority
+            _timer = new DispatcherTimer(DispatcherPriority.Send); //creating timer with max priority
             
-            timer.Tick += new EventHandler(Metronome_Tick);
+            _timer.Tick += new EventHandler(Metronome_Tick);
         }
         public override void Start()
         {
-            timer.Start();
+            _timer.Start();
         }
 
         public override void Stop()
         {
-            timer.Stop();
+            _timer.Stop();
         }
 
 
-        public override TimeSpan Interval { get { return timer.Interval; }  set { timer.Interval = value; } }
+        public override TimeSpan Interval { get { return _timer.Interval; }  set { _timer.Interval = value; } }
         
 
         #region Events

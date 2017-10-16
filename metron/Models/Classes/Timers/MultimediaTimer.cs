@@ -10,9 +10,9 @@ namespace Metron
 {
     public class MultimediaTimer : IDisposable
     {
-        private bool disposed = false;
-        private int interval, resolution;
-        private UInt32 timerId;
+        private bool _disposed = false;
+        private int _interval, _resolution;
+        private UInt32 _timerId;
 
         public MultimediaTimer()
         {
@@ -29,7 +29,7 @@ namespace Metron
         {
             get
             {
-                return interval;
+                return _interval;
             }
             set
             {
@@ -38,7 +38,7 @@ namespace Metron
                 if (value < 0)
                     throw new ArgumentOutOfRangeException("value");
 
-                interval = value;
+                _interval = value;
                 if (Resolution > Interval)
                     Resolution = value;
             }
@@ -49,7 +49,7 @@ namespace Metron
         {
             get
             {
-                return resolution;
+                return _resolution;
             }
             set
             {
@@ -58,13 +58,13 @@ namespace Metron
                 if (value < 0)
                     throw new ArgumentOutOfRangeException("value");
 
-                resolution = value;
+                _resolution = value;
             }
         }
 
         public bool IsRunning
         {
-            get { return timerId != 0; }
+            get { return _timerId != 0; }
         }
 
         public void Start()
@@ -77,8 +77,8 @@ namespace Metron
             // Event type = 0, one off event
             // Event type = 1, periodic event
             UInt32 userCtx = 0;
-            timerId = NativeMethods.TimeSetEvent((uint)Interval, (uint)Resolution, TimerCallback, ref userCtx, 1);
-            if (timerId == 0)
+            _timerId = NativeMethods.TimeSetEvent((uint)Interval, (uint)Resolution, TimerCallback, ref userCtx, 1);
+            if (_timerId == 0)
             {
                 int error = Marshal.GetLastWin32Error();
                 throw new Win32Exception(error);
@@ -97,8 +97,8 @@ namespace Metron
 
         private void StopInternal()
         {
-            NativeMethods.TimeKillEvent(timerId);
-            timerId = 0;
+            NativeMethods.TimeKillEvent(_timerId);
+            _timerId = 0;
         }
 
         public event EventHandler Elapsed;
@@ -119,16 +119,16 @@ namespace Metron
 
         private void CheckDisposed()
         {
-            if (disposed)
+            if (_disposed)
                 throw new ObjectDisposedException("MultimediaTimer");
         }
 
         private void Dispose(bool disposing)
         {
-            if (disposed)
+            if (_disposed)
                 return;
 
-            disposed = true;
+            _disposed = true;
             if (IsRunning)
             {
                 StopInternal();

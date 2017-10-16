@@ -14,25 +14,31 @@ namespace Metron
     public abstract class MetronomeModelAbstraction
     {
 
-        protected TimerAbstract timerImplementor = null;
-        protected MetromomeBeep beepImplementor = null;
+        protected TimerAbstract TimerImplementor = null;
+        protected IMetromomeBeep BeepImplementor = null;
 
-        public MetronomeModelAbstraction(TimerAbstract timerImplementor, MetromomeBeep beepImplementor)
+        protected MetronomeModelAbstraction(TimerAbstract timerImplementor, IMetromomeBeep beepImplementor)
         {
-            this.timerImplementor = timerImplementor;
-            this.beepImplementor = beepImplementor;
+            this.TimerImplementor = timerImplementor;
+            this.BeepImplementor = beepImplementor;
         }
 
         public bool IsRunning { get; internal set; }
 
         public virtual void StartTimer()
         {
-            timerImplementor.Start();
+            if (!IsRunning)
+            {
+                TimerImplementor.Start();
+                IsRunning = true;
+            }
+            
         }
 
         public virtual void StopTimer()
         {
-            timerImplementor.Stop();
+            TimerImplementor.Stop();
+            IsRunning = false;
         }
 
     }

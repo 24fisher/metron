@@ -18,17 +18,14 @@ namespace Metron
     {
 
         #region Fields
-        private MetronomeModelAbstraction metronome;
+        private MetronomeModelAbstraction _metronome;
 
 
         #endregion
         #region Constructor
-        public MetronomeViewModel(TimerAbstract implementorTimer, MetromomeBeep beepImplementor)
-        {
-             
-            metronome = new MetronomeModel(implementorTimer, beepImplementor);
-            OnPropertyChanged("MetronomeViewModel");
-
+        public MetronomeViewModel(TimerAbstract implementorTimer, IMetromomeBeep beepImplementor)
+        {         
+            _metronome = new MetronomeModel(implementorTimer, beepImplementor);
         }
 
 
@@ -80,11 +77,11 @@ namespace Metron
         #region Properties
         public MetronomeModelAbstraction Metronome
         {
-            get { return metronome; }
+            get { return _metronome; }
             set
             {
-                metronome = value;
-                OnPropertyChanged("Metronome");
+                _metronome = value;
+                OnPropertyChanged(nameof(Metronome));
             }
         }
         #endregion

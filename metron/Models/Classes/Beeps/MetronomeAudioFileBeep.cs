@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Metron
 {
-    class MetronomeAudioFileBeep : MetromomeBeep
+    class MetronomeAudioFileBeep : IMetromomeBeep
     {
         //string filename = "metronome-tick.wav";
-        SoundPlayer soundPlayer; 
+        //SoundPlayer soundPlayer; 
 
         public MetronomeAudioFileBeep()
         {
@@ -35,14 +35,14 @@ namespace Metron
         }
         
 
-        public override void DoHighBeep()
+        void IMetromomeBeep.PlayHighBeep()
         {
-            soundPlayer.Play();
+            throw new NotImplementedException();
         }
 
-        public override void DoLowBeep()
+        void IMetromomeBeep.PlayLowBeep()
         {
-            soundPlayer.Play();
+            throw new NotImplementedException();
         }
     }
 }

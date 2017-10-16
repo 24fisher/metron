@@ -1,6 +1,6 @@
 ﻿using System;
 
-struct TempoXML
+struct TempoXml
 {
     public string Name { get; set; }
     public int LowerLimit { get; set; }

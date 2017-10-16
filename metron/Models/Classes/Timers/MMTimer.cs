@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace Metron
 {
-    public class MMTimer : IDisposable
+    public class MmTimer : IDisposable
     {
-        public delegate void MMTimerCallback(uint id, uint msg, ref uint userCtx, uint rsv1, uint rsv2);
-        private readonly MMTimerCallback Callback;
+        public delegate void MmTimerCallback(uint id, uint msg, ref uint userCtx, uint rsv1, uint rsv2);
+        private readonly MmTimerCallback _callback;
         private bool _disposed;
         private bool _enabled;
         private int _interval;
         private uint _timerId;
-        private int resolution;
+        private int _resolution;
 
-        public MMTimer()
+        public MmTimer()
         {
-            Callback = TimerCallbackMethod;
+            _callback = TimerCallbackMethod;
             Resolution = 0;//0 - max res
             Interval = 10;
         }
@@ -62,7 +62,7 @@ namespace Metron
         {
             get
             {
-                return resolution;
+                return _resolution;
             }
             set
             {
@@ -71,7 +71,7 @@ namespace Metron
                 if (value < 0)
                     throw new ArgumentOutOfRangeException("value");
 
-                resolution = value;
+                _resolution = value;
             }
         }
         private void CheckDisposed()
@@ -85,7 +85,7 @@ namespace Metron
             Dispose(true);
         }
         public event EventHandler Elapsed;
-        ~MMTimer()
+        ~MmTimer()
         {
             Dispose(false);
         }
@@ -96,7 +96,7 @@ namespace Metron
             if (IsRunning)
                 throw new InvalidOperationException("Timer is already running.");
             uint user = 0;
-            _timerId = TimeSetEvent((uint)Interval, (uint)Resolution, Callback, ref user, 1);
+            _timerId = TimeSetEvent((uint)Interval, (uint)Resolution, _callback, ref user, 1);
             if (_timerId != 0)
                 return;
             var error = Marshal.GetLastWin32Error();
@@ -132,7 +132,7 @@ namespace Metron
             }
         }
         [DllImport("winmm.dll", SetLastError = true, EntryPoint = "timeSetEvent")]
-        public static extern uint TimeSetEvent(uint msDelay, uint msResolution, MMTimerCallback callback, ref uint user, uint eventType);
+        public static extern uint TimeSetEvent(uint msDelay, uint msResolution, MmTimerCallback callback, ref uint user, uint eventType);
         [DllImport("winmm.dll", SetLastError = true, EntryPoint = "timeKillEvent")]
         public static extern void TimeKillEvent(uint uTimerId);
     }

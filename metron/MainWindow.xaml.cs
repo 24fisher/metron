@@ -43,7 +43,7 @@ namespace Metron
             //
 
             var timerImplementor = new ConcreteTimerWin32();
-            var beepImplementor = new MetronomeAudioFileBeep();
+            var beepImplementor = new MetronomeConsoleBeep();
 
             DataContext = new MetronomeViewModel(timerImplementor, beepImplementor);
 

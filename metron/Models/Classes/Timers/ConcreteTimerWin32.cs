@@ -13,30 +13,30 @@ namespace Metron
     
     public class ConcreteTimerWin32 : TimerAbstract
     {
-        private MMTimer timer; // clr timer
+        private MmTimer _timer; // clr timer
         public override event EventHandler TimerTick;
 
 
         public ConcreteTimerWin32()
         {
-            timer = new MMTimer(); //creating timer with max priority
-            timer.Elapsed += new EventHandler(Metronome_Tick);
+            _timer = new MmTimer(); //creating timer with max priority
+            _timer.Elapsed += new EventHandler(Metronome_Tick);
         }
         public override void Start()
         {
-            timer.Start();
+            _timer.Start();
         }
 
         public override void Stop()
         {
-            if(timer.IsRunning)
-                timer.Stop();
+            if(_timer.IsRunning)
+                _timer.Stop();
         }
 
         public override TimeSpan Interval
         {
-            get { return TimeSpan.FromMilliseconds(timer.Interval); }
-            set { timer.Interval = (int)value.TotalMilliseconds; }
+            get { return TimeSpan.FromMilliseconds(_timer.Interval); }
+            set { _timer.Interval = (int)value.TotalMilliseconds; }
         }
         
  

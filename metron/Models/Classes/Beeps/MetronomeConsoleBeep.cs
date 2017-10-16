@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Metron
 {
-    public class MetronomeConsoleBeep : MetromomeBeep
+    public class MetronomeConsoleBeep : IMetromomeBeep
     {
-        public override void DoHighBeep()
+        void IMetromomeBeep.PlayHighBeep()
         {
             Console.Beep(5000, 100);
         }
 
-        public override void DoLowBeep()
+        void IMetromomeBeep.PlayLowBeep()
         {
             Console.Beep(4000, 100);
         }
