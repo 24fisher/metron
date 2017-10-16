@@ -1,3 +1,3 @@
 # metron
 
-metron is a simple C# metronome app using MVVM and Bridge design patterns 
+metron is a simple C# metronome app using WPF binding, MVVM and Bridge design patterns 
