@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tempos>
+      <tempo>
+        
+          <tempo_name>grave</tempo_name>
+
+
+        <lower_limit >40</lower_limit>
+
+
+        <higher_limit >48</higher_limit>
+        
+
+      </tempo>
+      <tempo>
+
+          <tempo_name>largo</tempo_name>
+
+
+        <lower_limit >44</lower_limit>
+
+
+        <higher_limit >52</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>largamente</tempo_name>
+
+
+        <lower_limit >46</lower_limit>
+
+
+        <higher_limit >54</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+
+          <tempo_name>adagio</tempo_name>
+
+
+        <lower_limit >48</lower_limit>
+
+
+        <higher_limit >56</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>lento</tempo_name>
+
+
+        <lower_limit >50</lower_limit>
+
+
+        <higher_limit >58</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>lentamente</tempo_name>
+
+
+        <lower_limit >52</lower_limit>
+
+
+        <higher_limit >60</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>larghetto</tempo_name>
+
+
+        <lower_limit >54</lower_limit>
+
+
+        <higher_limit >63</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>andante assai</tempo_name>
+
+
+        <lower_limit >56</lower_limit>
+
+
+        <higher_limit >66</higher_limit>
+        
+        
+      </tempo>
+      <tempo>
+        
+          <tempo_name>adagietto</tempo_name>
+
+
+        <lower_limit >58</lower_limit>
+
+
+        <higher_limit >72</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>andante</tempo_name>
+
+
+        <lower_limit >58</lower_limit>
+
+
+        <higher_limit >72</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>andante maestoso</tempo_name>
+
+
+        <lower_limit >60</lower_limit>
+
+
+        <higher_limit >69</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>andante mosso</tempo_name>
+
+
+        <lower_limit >69</lower_limit>
+
+
+        <higher_limit >76</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>
+            comodo,
+            comodamente
+          </tempo_name>
+
+
+        <lower_limit >63</lower_limit>
+
+
+        <higher_limit >80</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>andante non troppo</tempo_name>
+
+
+        <lower_limit >66</lower_limit>
+
+
+        <higher_limit >80</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>andante con moto</tempo_name>
+
+
+        <lower_limit >69</lower_limit>
+
+
+        <higher_limit >84</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>andantino</tempo_name>
+
+
+        <lower_limit >72</lower_limit>
+
+
+        <higher_limit >88</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>moderato assai</tempo_name>
+
+
+        <lower_limit >76</lower_limit>
+
+
+        <higher_limit >92</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>moderato</tempo_name>
+
+
+        <lower_limit >80</lower_limit>
+
+
+        <higher_limit >96</higher_limit>
+        
+        
+      </tempo>
+      <tempo>
+        
+          <tempo_name>con moto</tempo_name>
+
+
+        <lower_limit >84</lower_limit>
+
+
+        <higher_limit >100</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>allegretto moderato</tempo_name>
+
+
+        <lower_limit >88</lower_limit>
+
+
+        <higher_limit >104</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>allegretto</tempo_name>
+
+
+        <lower_limit >92</lower_limit>
+
+
+        <higher_limit >108</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>allegretto mosso</tempo_name>
+
+
+        <lower_limit >96</lower_limit>
+
+
+        <higher_limit >112</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>animato</tempo_name>
+
+
+        <lower_limit >100</lower_limit>
+
+
+        <higher_limit >116</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>animato assai</tempo_name>
+
+
+        <lower_limit >104</lower_limit>
+
+
+        <higher_limit >120</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>allegro moderato</tempo_name>
+
+
+        <lower_limit >108</lower_limit>
+
+
+        <higher_limit >126</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>tempo di marcia</tempo_name>
+
+
+        <lower_limit >112</lower_limit>
+
+
+        <higher_limit >126</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>allegro ma non troppo</tempo_name>
+
+
+        <lower_limit >116</lower_limit>
+
+
+        <higher_limit >132</higher_limit>
+        
+        
+      </tempo>
+      <tempo>
+        
+          <tempo_name>allegro tranquillo</tempo_name>
+
+
+        <lower_limit >116</lower_limit>
+
+
+        <higher_limit >132</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+
+          <tempo_name>allegro</tempo_name>
+
+
+        <lower_limit >120</lower_limit>
+
+
+        <higher_limit >144</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>allegro molto</tempo_name>
+
+
+        <lower_limit >138</lower_limit>
+
+
+        <higher_limit >160</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>allegro assai</tempo_name>
+
+
+        <lower_limit >144</lower_limit>
+
+
+        <higher_limit >168</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>
+            allegro agitato,
+            allegro animato
+          </tempo_name>
+
+
+        <lower_limit >152</lower_limit>
+
+
+        <higher_limit >176</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>allegro vivace</tempo_name>
+
+
+        <lower_limit >160</lower_limit>
+
+
+        <higher_limit >184</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>vivo</tempo_name>
+
+
+        <lower_limit >160</lower_limit>
+
+
+        <higher_limit >176</higher_limit>
+        
+
+      </tempo>
+      <tempo >
+        
+          <tempo_name>vivace</tempo_name>
+
+
+        <lower_limit >176</lower_limit>
+
+
+        <higher_limit >192</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>presto</tempo_name>
+
+
+        <lower_limit >184</lower_limit>
+
+
+        <higher_limit >200</higher_limit>
+        
+        
+      </tempo>
+      <tempo >
+        
+          <tempo_name>prestissimo</tempo_name>
+
+
+        <lower_limit >192</lower_limit>
+
+
+        <higher_limit >208</higher_limit>
+        
+        
+      </tempo>
+
+  </tempos>

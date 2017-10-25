@@ -141,12 +141,6 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MetronomeLib\Metron.CoreLib.csproj">
-      <Project>{d57ee358-0693-4947-ad24-7c073485c66b}</Project>
-      <Name>Metron.CoreLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="bin\Debug\sticks.wav" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +151,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\tempos_edited.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sticks_low.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sticks_high.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tempos_edited.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Metron.CoreLib\Metron.CoreLib.csproj">
+      <Project>{5e3bf166-3a5f-4030-a8f1-6e4d722a6d6e}</Project>
+      <Name>Metron.CoreLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

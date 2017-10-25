@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="2.4.0.18342" />
+    <Compile Remove="Lib\Services\**" />
+    <EmbeddedResource Remove="Lib\Services\**" />
+    <None Remove="Lib\Services\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MetronomeLib\Metron.CoreLib.csproj" />
+    <PackageReference Include="Xamarin.Forms" Version="2.4.0.18342" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Lib\Services\" />
+    <ProjectReference Include="..\Metron.CoreLib\Metron.CoreLib.csproj" />
   </ItemGroup>
 
 </Project>
