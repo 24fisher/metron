@@ -20,6 +20,7 @@ namespace Metron
         #region Fields
         private MetronomeModelAbstraction metronomeModel;
         private ITempoDescription tempoDescriptionService;
+    
 
         #endregion
         #region Constructor
