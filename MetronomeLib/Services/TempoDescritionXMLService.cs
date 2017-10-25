@@ -17,7 +17,7 @@ namespace Metron
             PlatformSpecificXmlDoc = doc;
         }
 
-
+         
         public IPlatformSpecificXMLDoc PlatformSpecificXmlDoc { get ; set; }
 
         public string GetTempoDescription(object tempo)
