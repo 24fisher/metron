@@ -1,0 +1,49 @@
+﻿<Window x:Class="Metron.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Metron"
+        mc:Ignorable="d"
+        Title="Metron v1.0" Height="347.017" Width="637.665" Closing="Window_Closing">
+    <DockPanel VerticalAlignment="Stretch" LastChildFill="True">
+        <Grid DockPanel.Dock="Top" Height="25" ShowGridLines="True" Background="LightBlue"/>
+        <Grid DockPanel.Dock="Top" Height="46" ShowGridLines="True" Background="LightBlue">
+            <StackPanel DockPanel.Dock="Top" Height="50" Width="Auto"  Background="LightBlue" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Ellipse Fill ="{Binding TickVisualization, UpdateSourceTrigger=PropertyChanged}" Name="EclipseTick"  Width="40" Height="40" Margin="0,3"/>
+            </StackPanel>
+            
+        </Grid>
+        <Grid DockPanel.Dock="Top" Height="46" ShowGridLines="True" Background="AliceBlue">
+            <TextBox Text ="{Binding Tempo, UpdateSourceTrigger=PropertyChanged}" Name="TextBox_BPM" Grid.Row="0" Grid.Column="0" Width="100" Margin="208,11,209,10" />
+
+        </Grid>
+        <Grid DockPanel.Dock="Top" Height="104" ShowGridLines="True" Background="AliceBlue">
+            <Slider Value ="{Binding Tempo, UpdateSourceTrigger=PropertyChanged}" Name="Slider_BPM" HorizontalAlignment="Center" Margin="46,10,0,0" VerticalAlignment="Top" Width="422" Maximum="300" Minimum="60" ValueChanged="Slider_ValueChanged"/>
+            <Button Grid.Row="0"  Content="Start" Height="20" VerticalAlignment="Top" Width="75"  Click="Button_Click_Start" Margin="221,31,221,0"/>
+            <Button Content="Stop"  Margin="221,56,221,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Stop" />
+
+        </Grid>
+
+
+
+
+        <Grid DockPanel.Dock="Top" Height="55" ShowGridLines="True" Background="AliceBlue">
+            <TextBlock Text ="Enter beat pattern:" Grid.Row="0" Grid.Column="0" Margin="59,11,431,0" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25"/>
+            <TextBox Text ="{Binding Pattern, UpdateSourceTrigger=PropertyChanged}" Name="TextBox_Pattern" Grid.Row="0" Grid.Column="1" Width="102" Margin="235,11,234,19" PreviewTextInput="TextBox_Pattern_PreviewTextInput" PreviewKeyDown="TextBox_Pattern_PreviewKeyDown" />
+            <TextBlock Text ="{Binding Measure, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="2" Margin="395,11,134,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="25" Width="101"/>
+
+
+        </Grid>
+
+        <Grid DockPanel.Dock="Bottom" Background="LightBlue">
+            <TextBlock Text ="{Binding TempoDescription, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="19,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+        </Grid>
+
+
+    </DockPanel>
+
+
+
+</Window>

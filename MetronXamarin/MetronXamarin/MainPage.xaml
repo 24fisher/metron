@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MetronXamarin"
+             x:Class="MetronXamarin.MainPage">
+    
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="33.333*"></RowDefinition>
+                <RowDefinition Height="33.333*"></RowDefinition>
+                <RowDefinition Height="33.333*"></RowDefinition>
+            </Grid.RowDefinitions>
+        </Grid>
+        <StackLayout Grid.Row="1">
+            <Label Text="Hi from vs2017"></Label>
+            <Label Text="Hi again!"></Label>
+            <Button x:Name="buttonMetronomeStart" Text="Start metronome!"></Button>
+        </StackLayout>
+
+    
+</ContentPage>
