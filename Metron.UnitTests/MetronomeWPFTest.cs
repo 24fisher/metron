@@ -28,6 +28,7 @@ namespace Metron.UnitTests
 
             _metronModel.StartTimer();
 
+
             Assert.AreEqual(_metronModel.IsRunning, true);
 
             _metronModel.StopTimer();
