@@ -22,6 +22,7 @@ namespace Metron
         private ITempoDescription tempoDescriptionService;
     
 
+
         #endregion
         #region Constructor
         public MetronomeViewModel(ITimer implementorTimer, IMetromomeSound beepImplementor, IColor colorImplementor, IPlatformSpecificXMLDoc doc)
