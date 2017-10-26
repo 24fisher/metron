@@ -7,4 +7,4 @@ Native android functionality is being accessed from Xamarin cross-platform with 
 The app uses different Timers via adapters in order to optimize perfomance in various environments.
 Supports user beat-patterns.
 -----------------------------
-To build the solution you will need vs2017 with xamarin extention. Version of .Net Standard lib required: 2.0
+To build the solution you will need vs2017 with xamarin extention installed. Version of .Net Standard lib required: 2.0
