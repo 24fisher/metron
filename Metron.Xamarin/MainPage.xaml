@@ -8,12 +8,23 @@
             <RowDefinition Height="33.333*"></RowDefinition>
             <RowDefinition Height="33.333*"></RowDefinition>
             <RowDefinition Height="33.333*"></RowDefinition>
+            <RowDefinition Height="33.333*"></RowDefinition>
+            <RowDefinition Height="33.333*"></RowDefinition>
+            <RowDefinition Height="33.333*"></RowDefinition>
+            <RowDefinition Height="33.333*"></RowDefinition>
+
         </Grid.RowDefinitions>
     </Grid>
-    <StackLayout Grid.Row="2">
+    <StackLayout>
         <Label Text="Metron app"></Label>
+        <Label Text="Tempo:"></Label>
         <Editor Text="{Binding Tempo}"></Editor>
-        <Label Text="{Binding TempoDescription}"></Label>
+        <Label Text="Beat pattern:"></Label>
+        <Editor Text="{Binding Pattern}"></Editor>
+        <Label Text="Measure:"></Label>
+        <Label Text="{Binding Measure}"></Label>
+        <Label Text="Tempo description:"></Label>
+        <Label MinimumHeightRequest="60" Text="{Binding TempoDescription}"></Label>
         <Slider x:Name="sliderTempo" Value="{Binding Tempo}"
             Maximum="300"
                 Minimum="60"

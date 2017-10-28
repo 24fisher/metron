@@ -27,13 +27,7 @@ namespace Metron
         {
             InitializeComponent();
 
-
-            var timerImplementor = new TimerWin32Adapted();
-            var beepImplementor = new WPFAudioFileBeep();
-            var colorImplementor = new ColorWPF();
-            var xmlDocImplementor = new WpfPlatformSpecificXmlDoc();
-
-            DataContext = new MetronomeViewModel(timerImplementor, beepImplementor, colorImplementor, xmlDocImplementor);
+            DataContext = new MetronomeViewModel(new WpfAppBuilder());
 
             
             //Setting window position

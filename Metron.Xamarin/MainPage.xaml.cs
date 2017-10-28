@@ -20,7 +20,8 @@ namespace MetronXamarin
             InitializeComponent();
             buttonMetronomeStart.Clicked += ButtonMetronomeStart_Clicked;
             sliderTempo.ValueChanged += Slider_ValueChanged;
-            metronomeViewModel = new Metron.MetronomeViewModel(new TimerXamarin(), new XamarinAudioFileBeep(), new ColorXamarin(), new XamarinDocPlatformSpecificXml());
+
+            metronomeViewModel = new Metron.MetronomeViewModel(new XamarinAppBuilder());
             this.BindingContext = metronomeViewModel;
         }
 

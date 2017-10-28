@@ -85,6 +85,7 @@
     <Compile Include="Lib\TimerNetFrameworkDispatcherTimer.cs" />
     <Compile Include="Lib\TimerWin32Adapted.cs" />
     <Compile Include="Lib\TimerNetFrameworkTimer.cs" />
+    <Compile Include="Lib\WpfAppBuilder.cs" />
     <Compile Include="Lib\WPFAudioFileBeep.cs" />
     <Compile Include="Lib\WpfPlatformSpecificXmlDoc.cs" />
     <Compile Include="MainWindow.xaml.cs">

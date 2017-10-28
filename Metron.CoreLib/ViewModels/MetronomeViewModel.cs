@@ -25,12 +25,13 @@ namespace Metron
 
         #endregion
         #region Constructor
-        public MetronomeViewModel(ITimer implementorTimer, IMetromomeSound beepImplementor, IColor colorImplementor, IPlatformSpecificXMLDoc doc)
+        public MetronomeViewModel(IAppBuilder appBuilder)
         {         
-            metronomeModel = new MetronomeModel(implementorTimer, beepImplementor, colorImplementor);
+            metronomeModel = new MetronomeModel(
+                appBuilder.TimerImplementor, appBuilder.SoundImplementor, appBuilder.ColorImplementor);
             metronomeModel.Timer.TimerTick += MetronomeViewModel_MetronomeTick;
 
-            tempoDescriptionService = new TempoDescritionXMLService(doc);
+            tempoDescriptionService = new TempoDescritionXMLService(appBuilder.XmlDocImplementor);
         }
 
         
