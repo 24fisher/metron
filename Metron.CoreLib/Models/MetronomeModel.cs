@@ -25,6 +25,7 @@ namespace Metron
         private string tickVisualization;
         private string tempoDescription;
         private IColor color;
+        private const int initialTempo = 100;
         
 
         #endregion
@@ -47,7 +48,7 @@ namespace Metron
 
             metronomePattern = new Pattern();
             
-            Tempo = 100;
+            Tempo = initialTempo;
             
             TickVisualization = color.GetColor("White");
 

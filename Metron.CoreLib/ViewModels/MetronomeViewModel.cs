@@ -20,8 +20,9 @@ namespace Metron
         #region Fields
         private MetronomeModelAbstraction metronomeModel;
         private ITempoDescription tempoDescriptionService;
-        private const int MetronomeLowLimit = 60;
-    
+        private const int metronomeLowLimit = 60;
+        private const int metronomeHighLimit = 600;
+
 
 
         #endregion
@@ -106,7 +107,7 @@ namespace Metron
             get => metronomeModel.Tempo;
             set
             {
-                if (value >= MetronomeLowLimit)
+                if ((value >= metronomeLowLimit) && (value <= metronomeHighLimit))
                 {
                     metronomeModel.Tempo = value;
                     OnPropertyChanged(nameof(Tempo));
@@ -121,9 +122,13 @@ namespace Metron
 
                     });
                 }
-                else
+                else if(value < metronomeLowLimit)
                 {
-                    metronomeModel.Tempo = MetronomeLowLimit;
+                    metronomeModel.Tempo = metronomeLowLimit;
+                }
+                else if (value > metronomeHighLimit)
+                {
+                    metronomeModel.Tempo = metronomeHighLimit;
                 }
             }
         }
@@ -146,6 +151,15 @@ namespace Metron
                 OnPropertyChanged(nameof(TickVisualization));
             }
         }
+        public bool IsRunning
+        {
+            get => metronomeModel.IsRunning;
+            set
+            {
+                metronomeModel.IsRunning = value;
+            }
+        }
+
         #endregion
     }
 }

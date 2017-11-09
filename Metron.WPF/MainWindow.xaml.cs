@@ -34,10 +34,7 @@ namespace Metron
             Left = MetronWPF.Properties.Settings.Default.WindowPosition.Left;
             Top = MetronWPF.Properties.Settings.Default.WindowPosition.Top;
 
-            
-
-
-
+           
         }
 
         #region Events
@@ -46,11 +43,6 @@ namespace Metron
             ((MetronomeViewModel)DataContext)?.TempoSliderMoved();
         }
 
-        private void Button_Click_Stop(object sender, RoutedEventArgs e)
-        {
-            
-            ((MetronomeViewModel)DataContext).Stop();
-        }
 
         private void Button_Click_Pattern(object sender, RoutedEventArgs e)
         {
@@ -59,10 +51,18 @@ namespace Metron
 
         private void Button_Click_Start(object sender, RoutedEventArgs e)
         {
+            if (!((MetronomeViewModel) DataContext).IsRunning)
+            {
+                ButtonStart.Content = "Stop";
+                ((MetronomeViewModel) DataContext).Run();
+            }
+            else
+            {
+                ButtonStart.Content = "Start";
+                ((MetronomeViewModel)DataContext).Stop();
+            }
 
-            ((MetronomeViewModel)DataContext).Run();
 
-            
         }
         private void Button_Click_Minus_10_BPM(object sender, RoutedEventArgs e)
         {
