@@ -20,6 +20,7 @@ namespace Metron
         #region Fields
         private MetronomeModelAbstraction metronomeModel;
         private ITempoDescription tempoDescriptionService;
+        private const int MetronomeLowLimit = 60;
     
 
 
@@ -28,7 +29,9 @@ namespace Metron
         public MetronomeViewModel(IAppBuilder appBuilder)
         {         
             metronomeModel = new MetronomeModel(
-                appBuilder.TimerImplementor, appBuilder.SoundImplementor, appBuilder.ColorImplementor);
+                appBuilder.TimerImplementor, 
+                appBuilder.SoundImplementor, 
+                appBuilder.ColorImplementor);
             metronomeModel.Timer.TimerTick += MetronomeViewModel_MetronomeTick;
 
             tempoDescriptionService = new TempoDescritionXMLService(appBuilder.XmlDocImplementor);
@@ -103,18 +106,25 @@ namespace Metron
             get => metronomeModel.Tempo;
             set
             {
-                metronomeModel.Tempo = value;
-                OnPropertyChanged(nameof(Tempo));
-                
-
-                //Calling async method from servise 
-                Task<string> task = tempoDescriptionService.GetTempoDescriptionAsync(Tempo);
-                task.ContinueWith(t =>
+                if (value >= MetronomeLowLimit)
                 {
-                    TempoDescription = t.Result;
-                    OnPropertyChanged(nameof(TempoDescription));
-                    
-                });
+                    metronomeModel.Tempo = value;
+                    OnPropertyChanged(nameof(Tempo));
+
+
+                    //Calling async method from servise 
+                    Task<string> task = tempoDescriptionService.GetTempoDescriptionAsync(Tempo);
+                    task.ContinueWith(t =>
+                    {
+                        TempoDescription = t.Result;
+                        OnPropertyChanged(nameof(TempoDescription));
+
+                    });
+                }
+                else
+                {
+                    metronomeModel.Tempo = MetronomeLowLimit;
+                }
             }
         }
         public string Pattern

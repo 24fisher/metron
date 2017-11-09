@@ -64,6 +64,15 @@ namespace Metron
 
             
         }
+        private void Button_Click_Minus_10_BPM(object sender, RoutedEventArgs e)
+        {
+            ((MetronomeViewModel) DataContext).Tempo -= 10;
+        }
+        private void Button_Click_Plus_10_BPM(object sender, RoutedEventArgs e)
+        {
+            ((MetronomeViewModel)DataContext).Tempo += 10;
+        }
+
         #endregion
 
         #region Textbox input filter
@@ -99,8 +108,9 @@ namespace Metron
             MetronWPF.Properties.Settings.Default.WindowPosition = this.RestoreBounds;
             MetronWPF.Properties.Settings.Default.Save();
         }
+
         #endregion
 
-
+        
     }
 }
