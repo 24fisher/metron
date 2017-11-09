@@ -20,25 +20,34 @@ namespace Metron
         #region Fields
         private MetronomeModelAbstraction metronomeModel;
         private ITempoDescription tempoDescriptionService;
-        private const int metronomeLowLimit = 60;
-        private const int metronomeHighLimit = 600;
+        private readonly int metronomeLowLimit;
+        private readonly int metronomeHighLimit;
 
 
 
         #endregion
         #region Constructor
         public MetronomeViewModel(IAppBuilder appBuilder)
-        {         
+        {
+            metronomeLowLimit = appBuilder.metronomeLowLimit;
+            metronomeHighLimit = appBuilder.metronomeHighLimit;
+
             metronomeModel = new MetronomeModel(
                 appBuilder.TimerImplementor, 
                 appBuilder.SoundImplementor, 
-                appBuilder.ColorImplementor);
+                appBuilder.ColorImplementor,
+                appBuilder.metronomeLowLimit,
+                appBuilder.metronomeHighLimit);
+            
+
             metronomeModel.Timer.TimerTick += MetronomeViewModel_MetronomeTick;
+            metronomeModel.OnSpeedTrainerTempoChangedEventHandler += MetronomeViewModel_SpeedTrainerTempoChanged;
 
             tempoDescriptionService = new TempoDescritionXMLService(appBuilder.XmlDocImplementor);
         }
 
         
+
 
         #endregion
         #region Public members
@@ -76,6 +85,7 @@ namespace Metron
             }
         }
 
+
         #endregion
 
         #region Events
@@ -88,6 +98,11 @@ namespace Metron
         {
             OnPropertyChanged(nameof(TickVisualization));
         }
+        private void MetronomeViewModel_SpeedTrainerTempoChanged(object sender, EventArgs e)
+        {
+            OnPropertyChanged(nameof(Tempo));
+        }
+
 
         #endregion
 
@@ -158,6 +173,11 @@ namespace Metron
             {
                 metronomeModel.IsRunning = value;
             }
+        }
+        public bool IsSpeedTrainerActivated
+        {
+            get => metronomeModel.IsSpeedTrainerActivated;
+            set => metronomeModel.IsSpeedTrainerActivated = value;
         }
 
         #endregion

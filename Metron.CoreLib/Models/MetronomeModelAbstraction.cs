@@ -17,6 +17,7 @@ namespace Metron
         protected ITimer TimerImplementor = null;
         protected IMetromomeSound BeepImplementor = null;
         protected IColor colorImplementor = null;
+        public EventHandler OnSpeedTrainerTempoChangedEventHandler;
 
         protected MetronomeModelAbstraction(ITimer timerImplementor, IMetromomeSound beepImplementor, IColor colorImplementor)
         {
@@ -42,13 +43,17 @@ namespace Metron
             TimerImplementor.Stop();
             IsRunning = false;
         }
+
+
+
         public abstract string TempoDescription { get; set; }
         public abstract string Measure { get; }
         public abstract int Tempo { get; set; }
         public abstract string Pattern { get; set; }
         public abstract string TickVisualization { get; set; }
         public abstract ITimer Timer { get; }
-        
+        public abstract bool IsSpeedTrainerActivated { get; set; }
+
 
     }
 }

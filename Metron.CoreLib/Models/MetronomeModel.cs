@@ -26,7 +26,11 @@ namespace Metron
         private string tempoDescription;
         private IColor color;
         private const int initialTempo = 100;
-        
+        private SpeedTrainer speedTrainer;
+        private readonly int _metronomeLowLimit;
+        private readonly int _metronomeHighLimit;
+
+
 
         #endregion
 
@@ -36,26 +40,31 @@ namespace Metron
         /// </summary>
         /// <param name="timerImplementor">abstract timer object</param>
         ///  <param name="beepImplementor">abstract Beep object</param>
-        ///  ///  <param name="colorImplementor">abstract color object</param>
-        public MetronomeModel(ITimer timerImplementor, IMetromomeSound beepImplementor, IColor colorImplementor) : base(timerImplementor, beepImplementor, colorImplementor)
+        ///    <param name="colorImplementor">abstract color object</param>
+        public MetronomeModel(ITimer timerImplementor, 
+            IMetromomeSound beepImplementor, 
+            IColor colorImplementor, 
+            int metronomeLowLimit, 
+            int metronomeHighLimit) : base(timerImplementor, beepImplementor, colorImplementor)
         {
             timer = timerImplementor; // setting timer type from abstract class
             beep = beepImplementor; // setting beep type from abstract class
             color = colorImplementor; // setting color type from abstract class
-            
 
+            this._metronomeLowLimit = metronomeLowLimit;
+            this._metronomeHighLimit = metronomeHighLimit;
+
+                
             timer.TimerTick += new EventHandler(Metronome_Tick);
-
             metronomePattern = new Pattern();
-            
+            metronomePattern.OnNextTaktHandler += new EventHandler(Metronome_OnNextTakt);
             Tempo = initialTempo;
-            
             TickVisualization = color.GetColor("White");
-
-
-
+            speedTrainer = new SpeedTrainer(bpmIncrease:1, taktsToEncreaseTempo:8);
 
         }
+
+        
         #endregion
 
         #region Events
@@ -75,12 +84,34 @@ namespace Metron
             }
 
 
-            if (metronomePattern.CurrentTickIndex % 2 == 0)
-                TickVisualization = color.GetColor("Red");
-            else TickVisualization = color.GetColor("Green");
+            TickVisualization = color.GetColor(metronomePattern.CurrentTickIndex % 2 == 0 ? "Red" : "Green");
 
             metronomePattern.NextTick();
 
+        }
+
+        private void Metronome_OnNextTakt(object sender, EventArgs e)
+        {
+            if (speedTrainer.IsActivated)
+            {
+                
+                int temp = Tempo;
+                int newTempo = speedTrainer.NextTick(Tempo);
+
+                if (newTempo <= _metronomeHighLimit)
+                {
+                    Tempo = newTempo;
+
+                    if (temp != Tempo)
+                    {
+                        // speed up!
+                        StopTimer();
+                        StartTimer();
+
+                        OnSpeedTrainerTempoChangedEventHandler.Invoke(this, new EventArgs());
+                    }
+                }
+            }
         }
         #endregion
 
@@ -100,6 +131,7 @@ namespace Metron
             base.StopTimer();
             IsRunning = false;
         }
+
         #endregion
 
 
@@ -125,8 +157,6 @@ namespace Metron
             {
                 tempo = value;
 
-                
-
                 //tempoDescription =  tempoDescriptionService.GetTempoDescription(tempo);
             }
         }
@@ -150,6 +180,12 @@ namespace Metron
             }
         }
         public override ITimer Timer => timer;
+
+        public override bool IsSpeedTrainerActivated
+        {
+            get => speedTrainer.IsActivated;
+            set => speedTrainer.IsActivated = value;
+        }
 
         #endregion
     }

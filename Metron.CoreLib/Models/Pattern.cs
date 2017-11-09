@@ -9,6 +9,7 @@ namespace Metron
     {
         private char[] _patternChars;
         private string _patternString;
+        public EventHandler OnNextTaktHandler;
 
         #region Indexer
         public char this[int charIndex]
@@ -65,6 +66,7 @@ namespace Metron
             {
                 CurrentTickIndex = 0;
                 CurrentTick = PatternString[0];
+                OnNextTaktHandler.Invoke(this,new EventArgs());
             }
 
         }

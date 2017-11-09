@@ -92,6 +92,20 @@ namespace Metron
             ((MetronomeViewModel)DataContext).Tempo /= 2;
         }
 
+        private void Button_SpeedTrainer_Start(object sender, RoutedEventArgs e)
+        {
+            if (!((MetronomeViewModel)DataContext).IsSpeedTrainerActivated)
+            {
+                ButtonSpeedTrainer.Content = "Deactivate speed trainer";
+                ((MetronomeViewModel)DataContext).IsSpeedTrainerActivated = true;
+            }
+            else
+            {
+                ButtonSpeedTrainer.Content = "Activate speed trainer";
+                ((MetronomeViewModel)DataContext).IsSpeedTrainerActivated = false;
+            }
+        }
+
         #endregion
 
         #region Textbox input filter
@@ -127,6 +141,7 @@ namespace Metron
             MetronWPF.Properties.Settings.Default.WindowPosition = this.RestoreBounds;
             MetronWPF.Properties.Settings.Default.Save();
         }
+
 
 
         #endregion
