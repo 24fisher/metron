@@ -16,9 +16,13 @@
         </Grid>
         <Grid DockPanel.Dock="Top" Height="46"  Background="LightBlue">
             <StackPanel  Height="50" Width="Auto"  Background="LightBlue" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="/2"  VerticalAlignment="Center" Click="Button_Click_dev2_BPM" Padding="10"/>
                 <Button Content="-10 bpm"  VerticalAlignment="Center" Click="Button_Click_Minus_10_BPM"  Padding="10" />
+                <Button Content="-2 bpm"  VerticalAlignment="Center" Click="Button_Click_Minus_2_BPM"  Padding="10" />
                 <TextBox Text ="{Binding Tempo, UpdateSourceTrigger=PropertyChanged}" Name="TextBox_BPM"  Width="100" Height="30"  Margin="10"/>
+                <Button Content="+2 bpm"  VerticalAlignment="Center" Click="Button_Click_Plus_2_BPM"  Padding="10" />
                 <Button Content="+10 bpm"  VerticalAlignment="Center" Click="Button_Click_Plus_10_BPM" Padding="10"/>
+                <Button Content="x2"  VerticalAlignment="Center" Click="Button_Click_x2_BPM" Padding="10"/>
             </StackPanel>
         </Grid>
         <Grid DockPanel.Dock="Top" Height="120" ShowGridLines="True" Background="AliceBlue">

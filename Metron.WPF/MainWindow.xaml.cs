@@ -72,6 +72,25 @@ namespace Metron
         {
             ((MetronomeViewModel)DataContext).Tempo += 10;
         }
+        private void Button_Click_Minus_2_BPM(object sender, RoutedEventArgs e)
+        {
+            ((MetronomeViewModel)DataContext).Tempo -= 2;
+        }
+
+        private void Button_Click_Plus_2_BPM(object sender, RoutedEventArgs e)
+        {
+            ((MetronomeViewModel)DataContext).Tempo += 2;
+        }
+
+        private void Button_Click_x2_BPM(object sender, RoutedEventArgs e)
+        {
+            ((MetronomeViewModel)DataContext).Tempo *= 2;
+        }
+
+        private void Button_Click_dev2_BPM(object sender, RoutedEventArgs e)
+        {
+            ((MetronomeViewModel)DataContext).Tempo /= 2;
+        }
 
         #endregion
 
@@ -108,6 +127,7 @@ namespace Metron
             MetronWPF.Properties.Settings.Default.WindowPosition = this.RestoreBounds;
             MetronWPF.Properties.Settings.Default.Save();
         }
+
 
         #endregion
 
