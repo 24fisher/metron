@@ -16,8 +16,5 @@ namespace Metron
         int metronomeHighLimit { get; set; }
 
 
-
-
-
     }
 }

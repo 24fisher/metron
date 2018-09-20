@@ -19,7 +19,7 @@ namespace Metron.UnitTests
         [SetUp]
         public void Init()
         {
-            _metronModel = new MetronomeModel(new TimerWin32Adapted(), new WPFConsoleBeep(), new ColorWPF());
+            _metronModel = new MetronomeModel(new TimerWin32Adapted(), new WPFConsoleBeep(), new ColorWPF(), 0, 250);
         }
         [Test]
         public void ModelStartStopTest()

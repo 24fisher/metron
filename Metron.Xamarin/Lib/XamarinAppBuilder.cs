@@ -20,5 +20,7 @@ namespace Metron
         public IMetromomeSound SoundImplementor { get; set; }
         public IColor ColorImplementor { get; set; }
         public IPlatformSpecificXMLDoc XmlDocImplementor { get; set; }
+        public int metronomeLowLimit { get; set; }
+        public int metronomeHighLimit { get; set; }
     }
 }

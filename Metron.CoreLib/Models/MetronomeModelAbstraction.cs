@@ -21,9 +21,9 @@ namespace Metron
 
         protected MetronomeModelAbstraction(ITimer timerImplementor, IMetromomeSound beepImplementor, IColor colorImplementor)
         {
-            this.TimerImplementor = timerImplementor;
-            this.BeepImplementor = beepImplementor;
-            this.colorImplementor = colorImplementor;
+            TimerImplementor = timerImplementor;
+            BeepImplementor = beepImplementor;
+            colorImplementor = colorImplementor;
         }
 
         public bool IsRunning { get; internal set; }
