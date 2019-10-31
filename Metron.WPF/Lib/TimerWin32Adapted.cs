@@ -22,12 +22,12 @@ namespace Metron
             _timer = new TimerWin32Wrapper(); 
             _timer.Elapsed += new EventHandler(Metronome_Tick);
         }
-        void ITimer.Start()
+        void ITimer.StartTimer()
         {
             _timer.Start();
         }
 
-        void ITimer.Stop()
+        void ITimer.StopTimer()
         {
             if(_timer.IsRunning)
                 _timer.Stop();

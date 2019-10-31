@@ -21,12 +21,12 @@ namespace Metron
 
             _timer.Tick += new EventHandler(Metronome_Tick);
         }
-        void ITimer.Start()
+        void ITimer.StartTimer()
         {
             _timer.Start();
         }
 
-        void ITimer.Stop()
+        void ITimer.StopTimer()
         {
             _timer.Stop();
         }

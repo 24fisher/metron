@@ -16,9 +16,7 @@ namespace Metron
         private readonly IColor _color;
         private const int _initialTempo = 100;
         private readonly SpeedTrainer _speedTrainer;
-        private readonly int _metronomeLowLimit;
         private readonly int _metronomeHighLimit;
-        private readonly ITimer _timer;
         public EventHandler OnSpeedTrainerTempoChangedEventHandler;
         public bool IsRunning { get; internal set; }
         public string TempoDescription { get; set; }
@@ -39,7 +37,7 @@ namespace Metron
 
         }
         public string TickVisualization { get; set; }
-        public ITimer Timer => _timer;
+        public ITimer Timer { get; }
         public bool IsSpeedTrainerActivated
         {
             get => _speedTrainer.IsActivated;
@@ -47,17 +45,17 @@ namespace Metron
         }
 
 
-        public MetronomeModel(ITimer timerImplementor, IMetromomeSound beepImplementor, IColor colorImplementor, int metronomeLowLimit, int metronomeHighLimit)
+        public MetronomeModel(ITimer timerImplementor, IMetromomeSound beepImplementor, IColor colorImplementor, int metronomeHighLimit)
         {
-            _timer = timerImplementor;
+            Timer = timerImplementor;
             _beep = beepImplementor;
             _color = colorImplementor;
 
-            _metronomeLowLimit = metronomeLowLimit;
+         
             _metronomeHighLimit = metronomeHighLimit;
 
 
-            _timer.TimerTick += new EventHandler(Metronome_Tick);
+            Timer.TimerTick += new EventHandler(Metronome_Tick);
             _metronomePattern = new Pattern();
             _metronomePattern.OnNextTaktHandler += new EventHandler(Metronome_OnNextTakt);
             Tempo = _initialTempo;
@@ -119,24 +117,20 @@ namespace Metron
         public void StartTimer()
         {
 
-            
-
             if (!IsRunning)
             {
-                _timer.Stop();
-                _timer.Interval = TimeSpan.FromMilliseconds(60000 / Tempo);
+                Timer.StopTimer();
+                Timer.Interval = TimeSpan.FromMilliseconds(60000 / Tempo);
 
-                _timer.Start();
+                Timer.StartTimer();
                 IsRunning = true;
             }
-
-            IsRunning = true;
 
         }
         public void StopTimer()
         {
 
-            _timer.Stop();
+            Timer.StopTimer();
             IsRunning = false;
 
         }

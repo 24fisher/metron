@@ -19,7 +19,7 @@ namespace Metron
 
         public event EventHandler TimerTick;
 
-        void ITimer.Start()
+        void ITimer.StartTimer()
         {
             _timer = new Timer(); 
             _timer.Elapsed += Timer_Elapsed; ;
@@ -30,7 +30,7 @@ namespace Metron
             throw new NotImplementedException();
         }
 
-        void ITimer.Stop()
+        void ITimer.StopTimer()
         {
             throw new NotImplementedException();
         }

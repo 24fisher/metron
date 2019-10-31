@@ -17,16 +17,15 @@ namespace Metron
     public class MetronomeViewModel : INotifyPropertyChanged
     {
         
-        #region Fields
-        private MetronomeModel metronomeModel;
+
+        private readonly MetronomeModel metronomeModel;
         private ITempoDescription tempoDescriptionService;
         private readonly int metronomeLowLimit;
         private readonly int metronomeHighLimit;
 
 
 
-        #endregion
-        #region Constructor
+
         public MetronomeViewModel(IAppBuilder appBuilder)
         {
             metronomeLowLimit = appBuilder.metronomeLowLimit;
@@ -36,7 +35,6 @@ namespace Metron
                 appBuilder.TimerImplementor, 
                 appBuilder.SoundImplementor, 
                 appBuilder.ColorImplementor,
-                appBuilder.metronomeLowLimit,
                 appBuilder.metronomeHighLimit);
             
 
@@ -49,8 +47,6 @@ namespace Metron
         
 
 
-        #endregion
-        #region Public members
         public void Run()
         {
             try
@@ -86,9 +82,8 @@ namespace Metron
         }
 
 
-        #endregion
 
-        #region Events
+   
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
@@ -104,9 +99,9 @@ namespace Metron
         }
 
 
-        #endregion
+ 
 
-        #region Properties
+ 
         public string TempoDescription
         {
             get => metronomeModel.TempoDescription;
@@ -180,6 +175,6 @@ namespace Metron
             set => metronomeModel.IsSpeedTrainerActivated = value;
         }
 
-        #endregion
+    
     }
 }

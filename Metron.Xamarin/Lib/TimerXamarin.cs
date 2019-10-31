@@ -30,7 +30,7 @@ namespace Metron
 
         }
 
-        void ITimer.Start()
+        void ITimer.StartTimer()
         {
             if (!isRuning)
             {
@@ -48,7 +48,7 @@ namespace Metron
             
         }
 
-        void ITimer.Stop()
+        void ITimer.StopTimer()
         {
             if (isRuning)
             {
