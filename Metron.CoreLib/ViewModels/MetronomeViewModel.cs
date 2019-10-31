@@ -18,7 +18,7 @@ namespace Metron
     {
         
         #region Fields
-        private MetronomeModelAbstraction metronomeModel;
+        private MetronomeModel metronomeModel;
         private ITempoDescription tempoDescriptionService;
         private readonly int metronomeLowLimit;
         private readonly int metronomeHighLimit;
