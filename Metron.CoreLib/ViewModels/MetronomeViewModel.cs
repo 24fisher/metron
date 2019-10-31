@@ -44,9 +44,6 @@ namespace Metron
             tempoDescriptionService = new TempoDescritionXMLService(appBuilder.XmlDocImplementor);
         }
 
-        
-
-
         public void Run()
         {
             try
@@ -98,9 +95,6 @@ namespace Metron
             OnPropertyChanged(nameof(Tempo));
         }
 
-
- 
-
  
         public string TempoDescription
         {
@@ -123,7 +117,7 @@ namespace Metron
                     OnPropertyChanged(nameof(Tempo));
 
 
-                    //Calling async method from servise 
+                    //Calling async method from service 
                     Task<string> task = tempoDescriptionService.GetTempoDescriptionAsync(Tempo);
                     task.ContinueWith(t =>
                     {
