@@ -12,55 +12,52 @@ namespace Metron
 {
     /// <summary>
     /// Metronome view model class.
-    /// Provides interaction with metronome model. Adds WPF and Xamarin data binding support to the model.
+    /// Adds WPF and Xamarin data binding support to the model; Adapts metronome model interface.
     /// </summary>
-    public class MetronomeViewModel : INotifyPropertyChanged
+    public class MetronomeViewModel : MetronomeModel, INotifyPropertyChanged
     {
         
 
-        private readonly MetronomeModel metronomeModel;
+       // private readonly MetronomeModel metronomeModel;
         private ITempoDescription tempoDescriptionService;
         private readonly int metronomeLowLimit;
         private readonly int metronomeHighLimit;
 
 
-
-
-        public MetronomeViewModel(IAppBuilder appBuilder)
+        public MetronomeViewModel(IAppBuilder appBuilder): base(appBuilder)
         {
+         
+
             metronomeLowLimit = appBuilder.metronomeLowLimit;
             metronomeHighLimit = appBuilder.metronomeHighLimit;
 
-            metronomeModel = new MetronomeModel(appBuilder);
-            
-
-            metronomeModel.Timer.TimerTick += MetronomeViewModel_MetronomeTick;
-            metronomeModel.OnSpeedTrainerTempoChangedEventHandler += MetronomeViewModel_SpeedTrainerTempoChanged;
+            base.Timer.TimerTick += MetronomeViewModel_MetronomeTick;
+            base.OnSpeedTrainerTempoChangedEventHandler += MetronomeViewModel_SpeedTrainerTempoChanged;
 
             tempoDescriptionService = new TempoDescritionXMLService(appBuilder.XmlDocImplementor);
         }
 
         public void Run()
         {
-            metronomeModel.StartTimer();
+            base.StartTimer();
 
         }
         public void Stop()
         {
-            metronomeModel.StopTimer();
+            base.StopTimer();
         }
         public void ChangePattern()
         {
-            if (metronomeModel.IsRunning)
+            if (base.IsRunning)
             {
-                metronomeModel.RestartTimer();
+                base.RestartTimer();
             }
         }
         public void TempoSliderMoved()
         {
-            if (metronomeModel.IsRunning)
+            if (base.IsRunning)
             {
-                metronomeModel.RestartTimer();
+                base.RestartTimer();
             }
         }
 
@@ -82,22 +79,21 @@ namespace Metron
  
         public string TempoDescription
         {
-            get => metronomeModel.TempoDescription;
+            get => base.TempoDescription;
             set
             {
-                metronomeModel.TempoDescription = value;
+                base.TempoDescription = value;
                 OnPropertyChanged(nameof(TempoDescription));
             }
         }
-        public string Measure { get => metronomeModel.Measure; }
         public int Tempo
         {
-            get => metronomeModel.Tempo;
+            get => base.Tempo;
             set
             {
                 if ((value >= metronomeLowLimit) && (value <= metronomeHighLimit))
                 {
-                    metronomeModel.Tempo = value;
+                    base.Tempo = value;
                     OnPropertyChanged(nameof(Tempo));
 
 
@@ -112,45 +108,32 @@ namespace Metron
                 }
                 else if(value < metronomeLowLimit)
                 {
-                    metronomeModel.Tempo = metronomeLowLimit;
+                    base.Tempo = metronomeLowLimit;
                 }
                 else if (value > metronomeHighLimit)
                 {
-                    metronomeModel.Tempo = metronomeHighLimit;
+                    base.Tempo = metronomeHighLimit;
                 }
             }
         }
         public string Pattern
         {
-            get => metronomeModel.Pattern;
+            get => base.Pattern;
             set
             {
-                metronomeModel.Pattern = value;
+                base.Pattern = value;
                 OnPropertyChanged(nameof(Pattern));
                 OnPropertyChanged(nameof(Measure));
             }
         }
         public string TickVisualization
         {
-            get => metronomeModel.TickVisualization;
+            get => base.TickVisualization;
             set
             {
-                metronomeModel.TickVisualization = value;
+                base.TickVisualization = value;
                 OnPropertyChanged(nameof(TickVisualization));
             }
-        }
-        public bool IsRunning
-        {
-            get => metronomeModel.IsRunning;
-            set
-            {
-                metronomeModel.IsRunning = value;
-            }
-        }
-        public bool IsSpeedTrainerActivated
-        {
-            get => metronomeModel.IsSpeedTrainerActivated;
-            set => metronomeModel.IsSpeedTrainerActivated = value;
         }
 
     
