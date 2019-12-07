@@ -11,8 +11,8 @@ using System.Threading;
 namespace Metron
 {
     /// <summary>
-    /// Metronome view model class. Receives timer implementor abstract object in constructor. 
-    /// Provides interaction with abstract timer object. Supports WPF and Xamarin data binding.
+    /// Metronome view model class.
+    /// Provides interaction with metronome model. Adds WPF and Xamarin data binding support to the model.
     /// </summary>
     public class MetronomeViewModel : INotifyPropertyChanged
     {
@@ -31,11 +31,7 @@ namespace Metron
             metronomeLowLimit = appBuilder.metronomeLowLimit;
             metronomeHighLimit = appBuilder.metronomeHighLimit;
 
-            metronomeModel = new MetronomeModel(
-                appBuilder.TimerImplementor, 
-                appBuilder.SoundImplementor, 
-                appBuilder.ColorImplementor,
-                appBuilder.metronomeHighLimit);
+            metronomeModel = new MetronomeModel(appBuilder);
             
 
             metronomeModel.Timer.TimerTick += MetronomeViewModel_MetronomeTick;
@@ -46,16 +42,8 @@ namespace Metron
 
         public void Run()
         {
-            try
-            {
+            metronomeModel.StartTimer();
 
-                metronomeModel.StartTimer();
-            }
-            catch (Exception)
-            {
-                throw new InvalidOperationException("Timer has not been started.");
-
-            }
         }
         public void Stop()
         {
@@ -65,20 +53,16 @@ namespace Metron
         {
             if (metronomeModel.IsRunning)
             {
-                this.Stop();
-                this.Run();
+                metronomeModel.RestartTimer();
             }
         }
         public void TempoSliderMoved()
         {
             if (metronomeModel.IsRunning)
             {
-                this.Stop();
-                this.Run();
+                metronomeModel.RestartTimer();
             }
         }
-
-
 
    
         public event PropertyChangedEventHandler PropertyChanged;

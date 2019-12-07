@@ -4,7 +4,7 @@ using System.Text;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-
+using Metron.CoreLib.Structs;
 
 namespace Metron
 {
@@ -14,7 +14,7 @@ namespace Metron
         private readonly IMetromomeSound _beep;
         private readonly Pattern _metronomePattern;
         private readonly IColor _color;
-        private const int _initialTempo = 100;
+        private const int _initialTempo = Constants.initialTempo;
         private readonly SpeedTrainer _speedTrainer;
         private readonly int _metronomeHighLimit;
         public EventHandler OnSpeedTrainerTempoChangedEventHandler;
@@ -45,14 +45,15 @@ namespace Metron
         }
 
 
-        public MetronomeModel(ITimer timerImplementor, IMetromomeSound beepImplementor, IColor colorImplementor, int metronomeHighLimit)
+        public MetronomeModel(IAppBuilder appBuilder)
         {
-            Timer = timerImplementor;
-            _beep = beepImplementor;
-            _color = colorImplementor;
+            
 
+            Timer = appBuilder?.TimerImplementor;
+            _beep = appBuilder.SoundImplementor;
+            _color = appBuilder.ColorImplementor;
          
-            _metronomeHighLimit = metronomeHighLimit;
+            _metronomeHighLimit = appBuilder.metronomeHighLimit;
 
 
             Timer.TimerTick += new EventHandler(Metronome_Tick);
@@ -104,14 +105,19 @@ namespace Metron
 
                     if (temp != Tempo)
                     {
-                        // speed up!
-                        StopTimer();
-                        StartTimer();
+                        // speed changed!
+                        RestartTimer();
 
                         OnSpeedTrainerTempoChangedEventHandler.Invoke(this, new EventArgs());
                     }
                 }
             }
+        }
+
+        public void RestartTimer()
+        {
+            StopTimer();
+            StartTimer();
         }
 
         public void StartTimer()
@@ -120,9 +126,19 @@ namespace Metron
             if (!IsRunning)
             {
                 Timer.StopTimer();
-                Timer.Interval = TimeSpan.FromMilliseconds(60000 / Tempo);
+                Timer.Interval = TimeSpan.FromMilliseconds(Constants.milliSecondsInOneMinute / Tempo);
+                
+                try
+                {
 
-                Timer.StartTimer();
+                    Timer.StartTimer();
+                }
+                catch (Exception)
+                {
+                    throw new InvalidOperationException("Timer has not been started.");
+
+                }
+
                 IsRunning = true;
             }
 

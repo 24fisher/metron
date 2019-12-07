@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Metron.CoreLib.Structs;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,7 +10,7 @@ namespace Metron
         private readonly int _bpmIncrease;
         private readonly int _taktsToEncreaseTempo;
 
-        private int _currentTick = 1;
+        private int _currentTick = Constants.initialTick;
 
         public SpeedTrainer(int bpmIncrease, int taktsToEncreaseTempo)
         {
@@ -21,7 +22,7 @@ namespace Metron
         {
             if (_currentTick == _taktsToEncreaseTempo)
             {
-                _currentTick = 1;
+                _currentTick = Constants.initialTick;
                 return currentTempo += _bpmIncrease;
             }
             else
