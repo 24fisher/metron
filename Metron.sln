@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Metron.Xamarin", "Metron.Xamarin\Metron.Xamarin.csproj", "{4EBD9018-1C9F-49DF-90C4-FE13FE88E5EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Metron.Mobile.XamarinForms", "Metron.Mobile.XamarinForms\Metron.Mobile.XamarinForms.csproj", "{4EBD9018-1C9F-49DF-90C4-FE13FE88E5EA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metron.WPF", "Metron.WPF\Metron.WPF.csproj", "{2641BC03-DAFB-4337-AABC-76F450DC0E1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metron.Xamarin.Android", "MetronXamarin\MetronXamarin.Android\Metron.Xamarin.Android.csproj", "{BEC51383-2472-4452-B0B5-B648C089F700}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metron.Mobile.Native.Android", "Metron.Mobile.Native\Android\Metron.Mobile.Native.Android.csproj", "{BEC51383-2472-4452-B0B5-B648C089F700}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metron.UnitTests", "Metron.UnitTests\Metron.UnitTests.csproj", "{756B839A-5F24-4015-B64C-81EC98836B31}"
 EndProject
