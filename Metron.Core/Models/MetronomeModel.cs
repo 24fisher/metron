@@ -33,17 +33,17 @@ namespace Metron
             _timer.TimerTick += Metronome_Tick;
             _metronomePattern = new Pattern();
             _metronomePattern.OnNextTaktHandler += Metronome_OnNextTakt;
-            _tempo = Constants.initialTempo;
+            Tempo = Constants.initialTempo;
             _tickVisualization = _color?.GetColor("White");
             _speedTrainer = new SpeedTrainer(1, 8);
         }
 
-        private string Measure => _metronomePattern.Measure;
+        public string Measure => _metronomePattern.Measure;
 
         public bool IsRunning { get; internal set; }
 
 
-        private string Pattern
+        public string Pattern
         {
             get => _metronomePattern.PatternString;
             set
@@ -60,7 +60,7 @@ namespace Metron
             set => _speedTrainer.IsActivated = value;
         }
 
-        private string TempoDescription
+        public string TempoDescription
         {
             get;
             set;
