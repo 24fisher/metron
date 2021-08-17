@@ -12,7 +12,7 @@ namespace MetronXamarin
 {
     public partial class MainPage : ContentPage
     {
-         MetronomeModel metronomeModel;
+         IMetronomeModel metronomeModel;
         
 
         public MainPage()
@@ -32,7 +32,7 @@ namespace MetronXamarin
         }
         private void Slider_ValueChanged(object sender, EventArgs e)
         {
-            ((MetronomeModel)BindingContext)?.RestartTimer();
+            ((IMetronomeModel)BindingContext)?.RestartTimer();
         }
     }
 }

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using MetronWPF;
-using System.Threading;
+﻿using NUnit.Framework;
 
 namespace Metron.UnitTests
 {
@@ -51,9 +44,7 @@ namespace Metron.UnitTests
         {
             
             _metronModel.Tempo = 205;
-            //_metronModel.Run();
 
-            //Thread.Sleep(500);
             Assert.AreEqual(_metronModel.Tempo, 205);
    
         }

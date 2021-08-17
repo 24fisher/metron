@@ -163,7 +163,7 @@
     <None Include="Resources\tempos_edited.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Metron.CoreLib\Metron.Core.csproj">
+    <ProjectReference Include="..\Metron.Core\Metron.Core.csproj">
       <Project>{5e3bf166-3a5f-4030-a8f1-6e4d722a6d6e}</Project>
       <Name>Metron.Core</Name>
     </ProjectReference>
