@@ -1,4 +1,4 @@
-﻿using Metron.CoreLib.Structs;
+﻿using Metron.Core.Structs;
 using System;
 using System.Collections.Generic;
 using System.Text;

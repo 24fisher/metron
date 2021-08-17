@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Metron.CoreLib.Structs
+namespace Metron.Core.Structs
 {
-    public struct Constants
+    public static class Constants
     {
         public const int initialTempo = 100;
 

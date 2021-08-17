@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Metron;
-using Metron.CoreLib;
+using Metron.Core;
 
 namespace Metron.UnitTests
 {

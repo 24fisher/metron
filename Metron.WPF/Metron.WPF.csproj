@@ -163,9 +163,9 @@
     <None Include="Resources\tempos_edited.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Metron.CoreLib\Metron.CoreLib.csproj">
+    <ProjectReference Include="..\Metron.CoreLib\Metron.Core.csproj">
       <Project>{5e3bf166-3a5f-4030-a8f1-6e4d722a6d6e}</Project>
-      <Name>Metron.CoreLib</Name>
+      <Name>Metron.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

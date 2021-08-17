@@ -62,9 +62,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Metron.CoreLib\Metron.CoreLib.csproj">
+    <ProjectReference Include="..\Metron.CoreLib\Metron.Core.csproj">
       <Project>{5e3bf166-3a5f-4030-a8f1-6e4d722a6d6e}</Project>
-      <Name>Metron.CoreLib</Name>
+      <Name>Metron.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Metron.WPF\Metron.WPF.csproj">
       <Project>{2641bc03-dafb-4337-aabc-76f450dc0e1f}</Project>

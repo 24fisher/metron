@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Metron.Xamarin", "Metron.Xamarin\Metron.Xamarin.csproj", "{4EBD9018-1C9F-49DF-90C4-FE13FE88E5EA}"
 EndProject
@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metron.Xamarin.Android", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metron.UnitTests", "Metron.UnitTests\Metron.UnitTests.csproj", "{756B839A-5F24-4015-B64C-81EC98836B31}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Metron.CoreLib", "Metron.CoreLib\Metron.CoreLib.csproj", "{5E3BF166-3A5F-4030-A8F1-6E4D722A6D6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Metron.Core", "Metron.CoreLib\Metron.Core.csproj", "{5E3BF166-3A5F-4030-A8F1-6E4D722A6D6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -55,9 +55,7 @@ namespace Metron.UnitTests
 
             //Thread.Sleep(500);
             Assert.AreEqual(_metronModel.Tempo, 205);
-            Assert.AreEqual(_metronModel.Measure, "4/4");
-
-            //Assert.AreEqual(_metronModel.TempoDescription, "prestissimo |");
+   
         }
     }
 }

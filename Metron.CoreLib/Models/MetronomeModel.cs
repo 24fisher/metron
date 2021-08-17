@@ -2,11 +2,11 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Security.Authentication.ExtendedProtection;
-using Metron.CoreLib.Structs;
+using Metron.Core.Structs;
 
 namespace Metron
 {
-    public class MetronomeModel : INotifyPropertyChanged
+    public class MetronomeModel : IMetronomeModel, INotifyPropertyChanged
     {
         private readonly int _metronomeHighLimit;
         private readonly int _metronomeLowLimit;
@@ -38,7 +38,7 @@ namespace Metron
             _speedTrainer = new SpeedTrainer(1, 8);
         }
 
-        public string Measure => _metronomePattern.Measure;
+        private string Measure => _metronomePattern.Measure;
 
         public bool IsRunning { get; internal set; }
 

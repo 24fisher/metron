@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Metron.CoreLib\Metron.CoreLib.csproj" />
+    <ProjectReference Include="..\Metron.CoreLib\Metron.Core.csproj" />
   </ItemGroup>
 
 </Project>

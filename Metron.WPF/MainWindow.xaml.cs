@@ -27,7 +27,7 @@ namespace Metron
         {
             InitializeComponent();
 
-            DataContext = new MetronomeModel(new WpfAppBuilder());
+            DataContext = (IMetronomeModel)new MetronomeModel(new WpfAppBuilder());
 
             
             //Setting window position
@@ -39,69 +39,69 @@ namespace Metron
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            ((MetronomeModel)DataContext)?.RestartTimer();
+            ((IMetronomeModel)DataContext)?.RestartTimer();
         }
 
 
         private void Button_Click_Pattern(object sender, RoutedEventArgs e)
         {
-            ((MetronomeModel)DataContext).RestartTimer();
+            ((IMetronomeModel)DataContext).RestartTimer();
         }
 
         private void Button_Click_Start(object sender, RoutedEventArgs e)
         {
-            if (!((MetronomeModel) DataContext).IsRunning)
+            if (!((IMetronomeModel) DataContext).IsRunning)
             {
                 ButtonStart.Content = "Stop";
-                ((MetronomeModel) DataContext).Run();
+                ((IMetronomeModel) DataContext).Run();
             }
             else
             {
                 ButtonStart.Content = "Start";
-                ((MetronomeModel)DataContext).Stop();
+                ((IMetronomeModel)DataContext).Stop();
             }
 
 
         }
         private void Button_Click_Minus_10_BPM(object sender, RoutedEventArgs e)
         {
-            ((MetronomeModel) DataContext).Tempo -= 10;
+            ((IMetronomeModel) DataContext).Tempo -= 10;
         }
         private void Button_Click_Plus_10_BPM(object sender, RoutedEventArgs e)
         {
-            ((MetronomeModel)DataContext).Tempo += 10;
+            ((IMetronomeModel)DataContext).Tempo += 10;
         }
         private void Button_Click_Minus_2_BPM(object sender, RoutedEventArgs e)
         {
-            ((MetronomeModel)DataContext).Tempo -= 2;
+            ((IMetronomeModel)DataContext).Tempo -= 2;
         }
 
         private void Button_Click_Plus_2_BPM(object sender, RoutedEventArgs e)
         {
-            ((MetronomeModel)DataContext).Tempo += 2;
+            ((IMetronomeModel)DataContext).Tempo += 2;
         }
 
         private void Button_Click_x2_BPM(object sender, RoutedEventArgs e)
         {
-            ((MetronomeModel)DataContext).Tempo *= 2;
+            ((IMetronomeModel)DataContext).Tempo *= 2;
         }
 
         private void Button_Click_dev2_BPM(object sender, RoutedEventArgs e)
         {
-            ((MetronomeModel)DataContext).Tempo /= 2;
+            ((IMetronomeModel)DataContext).Tempo /= 2;
         }
 
         private void Button_SpeedTrainer_Start(object sender, RoutedEventArgs e)
         {
-            if (!((MetronomeModel)DataContext).IsSpeedTrainerActivated)
+            if (!((IMetronomeModel)DataContext).IsSpeedTrainerActivated)
             {
                 ButtonSpeedTrainer.Content = "Deactivate speed trainer";
-                ((MetronomeModel)DataContext).IsSpeedTrainerActivated = true;
+                ((IMetronomeModel)DataContext).IsSpeedTrainerActivated = true;
             }
             else
             {
                 ButtonSpeedTrainer.Content = "Activate speed trainer";
-                ((MetronomeModel)DataContext).IsSpeedTrainerActivated = false;
+                ((IMetronomeModel)DataContext).IsSpeedTrainerActivated = false;
             }
         }
 
