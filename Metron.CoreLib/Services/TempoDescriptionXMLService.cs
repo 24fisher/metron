@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Metron
 {
-    public class TempoDescritionXMLService : ITempoDescription
+    public class TempoDescriptionXMLService : ITempoDescription
     {
-        public TempoDescritionXMLService(IPlatformSpecificXMLDoc doc)
+        public TempoDescriptionXMLService(IPlatformSpecificXMLDoc doc)
         {
             PlatformSpecificXmlDoc = doc;
         }
