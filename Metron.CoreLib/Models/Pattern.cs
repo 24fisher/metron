@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace Metron
 {
@@ -11,49 +8,57 @@ namespace Metron
         private string _patternString;
         public EventHandler OnNextTaktHandler;
 
-        #region Indexer
-        public char this[int charIndex]
-        {
-            get => _patternChars[charIndex];
-            set => _patternChars[charIndex] = value;
-        }
-        #endregion
 
-        #region Constructor
-        private Pattern() { }
         public Pattern(int currentTickIndex = 0, string patternString = "1000")
         {
             SetNewPatern(patternString);
             CurrentTickIndex = 0;
         }
+
+        #region Indexer
+
+        public char this[int charIndex]
+        {
+            get => _patternChars[charIndex];
+            set => _patternChars[charIndex] = value;
+        }
+
         #endregion
 
-        #region Private members
+
+        public char CurrentTick { get; private set; }
+        public int CurrentTickIndex { get; set; }
+
+        public string Measure
+        {
+            get; 
+            private set;
+        }
+
+        public string PatternString
+        {
+            get => _patternString;
+            set => SetNewPatern(value);
+        }
+
+
         private void SetMeasure()
         {
             Measure = PatternString.Length + "/" + 4;
         }
+
         private void SetNewPatern(string patternString)
         {
-
             // Input checks
             if (patternString == "") //Empty input string? => Setting default values
-            {
                 patternString = "1";
-
-            }
             if (patternString.Length > 20) // Max string length is 20 => Trimming string; tick index default value
-            {
                 patternString = patternString.Substring(0, 20);
-
-            }
             _patternChars = patternString.ToCharArray();
             _patternString = patternString;
             SetMeasure();
         }
-        #endregion
 
-        #region Public members
         public void NextTick()
         {
             CurrentTickIndex++;
@@ -66,27 +71,8 @@ namespace Metron
             {
                 CurrentTickIndex = 0;
                 CurrentTick = PatternString[0];
-                OnNextTaktHandler.Invoke(this,new EventArgs());
-            }
-
-        }
-        #endregion
-
-        #region Properties
-        public char CurrentTick { get; private set; }
-        public int CurrentTickIndex { get; set; } = 0;
-        public string Measure { get; private set; }
-        public string PatternString
-        {
-            get { return _patternString; }
-            set
-            {
-                SetNewPatern(value);
+                OnNextTaktHandler.Invoke(this, new EventArgs());
             }
         }
-        #endregion
-
-
-        
     }
 }

@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Metron
 {
-    public class TempoDescriptionXMLService : ITempoDescription
+    public class TempoDescriptionService : ITempoDescription
     {
-        public TempoDescriptionXMLService(IPlatformSpecificXMLDoc doc)
+        public TempoDescriptionService(IPlatformSpecificXMLDoc doc)
         {
             PlatformSpecificXmlDoc = doc;
         }
@@ -32,7 +32,7 @@ namespace Metron
             { return "error on opening xml stream"; }
 
             var items = from xe in xdoc.Element("tempos").Elements("tempo")
-                where ((Convert.ToInt32(xe.Element("lower_limit").Value) <= (int)tempo) && (Convert.ToInt32(xe.Element("higher_limit").Value) >= (int)tempo))
+                where (Convert.ToInt32(xe.Element("lower_limit").Value) <= (int)tempo) && (Convert.ToInt32(xe.Element("higher_limit").Value) >= (int)tempo)
                 select new TempoXml
                 {
                     Name = xe.Element("tempo_name").Value,
@@ -53,7 +53,7 @@ namespace Metron
         async Task<string> ITempoDescription.GetTempoDescriptionAsync(int tempo)
         {
 
-            return await Task<string>.Factory.StartNew(GetTempoDescription, tempo);
+            return await Task<string>.Factory.StartNew(GetTempoDescription, tempo).ConfigureAwait(false);
         }
     }
 }

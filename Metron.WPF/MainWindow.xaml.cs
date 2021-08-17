@@ -27,7 +27,7 @@ namespace Metron
         {
             InitializeComponent();
 
-            DataContext = new MetronomeViewModel(new WpfAppBuilder());
+            DataContext = new MetronomeModel(new WpfAppBuilder());
 
             
             //Setting window position
@@ -37,78 +37,76 @@ namespace Metron
            
         }
 
-        #region Events
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            ((MetronomeViewModel)DataContext)?.TempoSliderMoved();
+            ((MetronomeModel)DataContext)?.RestartTimer();
         }
 
 
         private void Button_Click_Pattern(object sender, RoutedEventArgs e)
         {
-            ((MetronomeViewModel)DataContext).ChangePattern();
+            ((MetronomeModel)DataContext).RestartTimer();
         }
 
         private void Button_Click_Start(object sender, RoutedEventArgs e)
         {
-            if (!((MetronomeViewModel) DataContext).IsRunning)
+            if (!((MetronomeModel) DataContext).IsRunning)
             {
                 ButtonStart.Content = "Stop";
-                ((MetronomeViewModel) DataContext).Run();
+                ((MetronomeModel) DataContext).Run();
             }
             else
             {
                 ButtonStart.Content = "Start";
-                ((MetronomeViewModel)DataContext).Stop();
+                ((MetronomeModel)DataContext).Stop();
             }
 
 
         }
         private void Button_Click_Minus_10_BPM(object sender, RoutedEventArgs e)
         {
-            ((MetronomeViewModel) DataContext).Tempo -= 10;
+            ((MetronomeModel) DataContext).Tempo -= 10;
         }
         private void Button_Click_Plus_10_BPM(object sender, RoutedEventArgs e)
         {
-            ((MetronomeViewModel)DataContext).Tempo += 10;
+            ((MetronomeModel)DataContext).Tempo += 10;
         }
         private void Button_Click_Minus_2_BPM(object sender, RoutedEventArgs e)
         {
-            ((MetronomeViewModel)DataContext).Tempo -= 2;
+            ((MetronomeModel)DataContext).Tempo -= 2;
         }
 
         private void Button_Click_Plus_2_BPM(object sender, RoutedEventArgs e)
         {
-            ((MetronomeViewModel)DataContext).Tempo += 2;
+            ((MetronomeModel)DataContext).Tempo += 2;
         }
 
         private void Button_Click_x2_BPM(object sender, RoutedEventArgs e)
         {
-            ((MetronomeViewModel)DataContext).Tempo *= 2;
+            ((MetronomeModel)DataContext).Tempo *= 2;
         }
 
         private void Button_Click_dev2_BPM(object sender, RoutedEventArgs e)
         {
-            ((MetronomeViewModel)DataContext).Tempo /= 2;
+            ((MetronomeModel)DataContext).Tempo /= 2;
         }
 
         private void Button_SpeedTrainer_Start(object sender, RoutedEventArgs e)
         {
-            if (!((MetronomeViewModel)DataContext).IsSpeedTrainerActivated)
+            if (!((MetronomeModel)DataContext).IsSpeedTrainerActivated)
             {
                 ButtonSpeedTrainer.Content = "Deactivate speed trainer";
-                ((MetronomeViewModel)DataContext).IsSpeedTrainerActivated = true;
+                ((MetronomeModel)DataContext).IsSpeedTrainerActivated = true;
             }
             else
             {
                 ButtonSpeedTrainer.Content = "Activate speed trainer";
-                ((MetronomeViewModel)DataContext).IsSpeedTrainerActivated = false;
+                ((MetronomeModel)DataContext).IsSpeedTrainerActivated = false;
             }
         }
 
-        #endregion
 
-        #region Textbox input filter
+
         private void TextBox_Pattern_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             
@@ -143,8 +141,6 @@ namespace Metron
         }
 
 
-
-        #endregion
 
         
     }

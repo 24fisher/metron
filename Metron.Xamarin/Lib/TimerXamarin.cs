@@ -12,70 +12,71 @@ namespace Metron
     public class TimerXamarin : ITimer
     {
         
-        private TimeSpan interval;
+        private TimeSpan _interval;
 
         public delegate void MetronomeTickDelegate(object sender, EventArgs e);
-        MetronomeTickDelegate tickDelegate;
 
-        private XamarinDeviceTimerWrapper timer;
+        readonly MetronomeTickDelegate _tickDelegate;
+
+        private XamarinDeviceTimerWrapper _timer;
 
         public event EventHandler TimerTick;
-        private bool isRuning;
+
+        private bool _isRunning;
 
         public TimerXamarin()
         {
-            tickDelegate = new MetronomeTickDelegate(Metronome_Tick);
-            isRuning = false;
+            _tickDelegate = new MetronomeTickDelegate(Metronome_Tick);
+            _isRunning = false;
 
 
         }
 
         void ITimer.StartTimer()
         {
-            if (!isRuning)
+            if (!_isRunning)
             {
-                timer = new XamarinDeviceTimerWrapper(Timer_Elapsed, interval, isRecurring:true);
-                timer.Start();
-                isRuning = true;
+                _timer = new XamarinDeviceTimerWrapper(Timer_Elapsed, _interval, isRecurring:true);
+                _timer.Start();
+                _isRunning = true;
             }
 
-            //Device.StartTimer(interval, Timer_Elapsed);
         }
 
         private void Timer_Elapsed()
         {
-            tickDelegate(this, new EventArgs());
+            _tickDelegate(this, new EventArgs());
             
         }
 
         void ITimer.StopTimer()
         {
-            if (isRuning)
+            if (_isRunning)
             {
-                timer.Stop();
-                isRuning = false;
+                _timer.Stop();
+                _isRunning = false;
             }
         }
 
         void Restart()
         {
-            if (isRuning)
+            if (_isRunning)
             {
-                timer.Stop();
-                isRuning = false;
+                _timer.Stop();
+                _isRunning = false;
             }
-            timer = new XamarinDeviceTimerWrapper(Timer_Elapsed, interval, isRecurring: true);
-            timer.Start();
-            isRuning = true;
+            _timer = new XamarinDeviceTimerWrapper(Timer_Elapsed, _interval, isRecurring: true);
+            _timer.Start();
+            _isRunning = true;
 
         }
 
         TimeSpan ITimer.Interval
         {
-            get { return interval; }
+            get { return _interval; }
             set
             {
-                interval = value;
+                _interval = value;
                 this.Restart();
             }
         }

@@ -1,54 +1,40 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Security.Authentication.ExtendedProtection;
 using Metron.CoreLib.Structs;
 
 namespace Metron
 {
     public class MetronomeModel : INotifyPropertyChanged
     {
-        private const int _initialTempo = Constants.initialTempo;
-        private readonly IMetromomeSound _beep;
-        private readonly IColor _color;
         private readonly int _metronomeHighLimit;
         private readonly int _metronomeLowLimit;
-
+        private int _tempo;
+        private readonly IMetromomeSound _beep;
+        private readonly IColor _color;
+        private readonly ITempoDescription _tempoDescriptionService;
         private readonly Pattern _metronomePattern;
         private readonly SpeedTrainer _speedTrainer;
+        private readonly ITimer _timer;
+        private string _tickVisualization;
 
-
-        private readonly ITempoDescription tempoDescriptionService;
-        public EventHandler OnSpeedTrainerTempoChangedEventHandler;
-        public int tempo;
-
-
-        private string tempoDescription;
 
         public MetronomeModel(IAppBuilder appBuilder)
         {
-            
-
-            Timer = appBuilder?.TimerImplementor;
-            _beep = appBuilder.SoundImplementor;
-            _color = appBuilder.ColorImplementor;
-
-           
-            OnSpeedTrainerTempoChangedEventHandler += MetronomeViewModel_SpeedTrainerTempoChanged;
-
+            _timer = appBuilder?.TimerImplementor;
+            _beep = appBuilder?.SoundImplementor;
+            _color = appBuilder?.ColorImplementor;
             _metronomeHighLimit = appBuilder.metronomeHighLimit;
-
             _metronomeLowLimit = appBuilder.metronomeLowLimit;
+            _tempoDescriptionService = new TempoDescriptionService(appBuilder.XmlDocImplementor);
 
 
-
-            tempoDescriptionService = new TempoDescriptionXMLService(appBuilder.XmlDocImplementor);
-
-            Timer.TimerTick += MetronomeViewModel_MetronomeTick;
-            Timer.TimerTick += Metronome_Tick;
+            _timer.TimerTick += Metronome_Tick;
             _metronomePattern = new Pattern();
             _metronomePattern.OnNextTaktHandler += Metronome_OnNextTakt;
-            Tempo = _initialTempo;
-            TickVisualization = _color.GetColor("White");
+            _tempo = Constants.initialTempo;
+            _tickVisualization = _color?.GetColor("White");
             _speedTrainer = new SpeedTrainer(1, 8);
         }
 
@@ -56,18 +42,8 @@ namespace Metron
 
         public bool IsRunning { get; internal set; }
 
-        public string TempoDescription
-        {
-            get => tempoDescription;
-            set
-            {
-                tempoDescription = value;
-                OnPropertyChanged(nameof(TempoDescription));
-            }
-        }
 
-
-        public string Pattern
+        private string Pattern
         {
             get => _metronomePattern.PatternString;
             set
@@ -78,72 +54,48 @@ namespace Metron
             }
         }
 
-
-        public string TickVisualization
-        {
-            get => TickVisualization;
-            set
-            {
-                TickVisualization = value;
-                OnPropertyChanged(nameof(TickVisualization));
-            }
-        }
-
-        public ITimer Timer { get; }
-
         public bool IsSpeedTrainerActivated
         {
             get => _speedTrainer.IsActivated;
             set => _speedTrainer.IsActivated = value;
         }
 
+        private string TempoDescription
+        {
+            get;
+            set;
+        }
+
 
         public int Tempo
         {
-            get => tempo;
+            get => _tempo;
             set
             {
                 if (value >= _metronomeLowLimit && value <= _metronomeHighLimit)
                 {
-                    Tempo = value;
+                    _tempo = value;
                     OnPropertyChanged(nameof(Tempo));
 
+                    TempoDescription = _tempoDescriptionService.GetTempoDescriptionAsync(_tempo).Result;
+                    OnPropertyChanged(nameof(TempoDescription));
 
-                    //Calling async method from service 
-                    var task = tempoDescriptionService.GetTempoDescriptionAsync(Tempo);
-                    task.ContinueWith(t =>
-                    {
-                        TempoDescription = t.Result;
-                        OnPropertyChanged(nameof(TempoDescription));
-                    });
                 }
                 else if (value < _metronomeLowLimit)
                 {
-                    tempo = _metronomeLowLimit;
+                    _tempo = _metronomeLowLimit;
                 }
                 else if (value > _metronomeHighLimit)
                 {
-                    tempo = _metronomeHighLimit;
+                    _tempo = _metronomeHighLimit;
                 }
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        
+        public void RestartTimer()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
-
-
-        public void ChangePattern()
-        {
-            if (IsRunning) RestartTimer();
-        }
-
-        public void TempoSliderMoved()
-        {
-            if (IsRunning) RestartTimer();
+            if (IsRunning) ForceRestartTimer();
         }
 
 
@@ -152,18 +104,19 @@ namespace Metron
             if (GetCurrentTackOrTick() == TickTack.MetronomeTick)
             {
                 _beep.PlayHighBeep();
-                TickVisualization = _color.GetColor("Red");
+                _tickVisualization = _color.GetColor("Red");
             }
 
             if (GetCurrentTackOrTick() == TickTack.MetronomeTack)
             {
                 _beep.PlayLowBeep();
-                TickVisualization = _color.GetColor("Green");
+                _tickVisualization = _color.GetColor("Green");
             }
 
 
-            TickVisualization = _color.GetColor(_metronomePattern.CurrentTickIndex % 2 == 0 ? "Red" : "Green");
+            _tickVisualization = _color.GetColor(_metronomePattern.CurrentTickIndex % 2 == 0 ? "Red" : "Green");
 
+            OnPropertyChanged(nameof(_tickVisualization));
             _metronomePattern.NextTick();
         }
 
@@ -186,54 +139,57 @@ namespace Metron
                     if (temp != Tempo)
                     {
                         // speed changed!
-                        RestartTimer();
+                        ForceRestartTimer();
 
-                        OnSpeedTrainerTempoChangedEventHandler.Invoke(this, new EventArgs());
+                        OnPropertyChanged(nameof(Tempo));
                     }
                 }
             }
         }
 
-        public void RestartTimer()
+        private void ForceRestartTimer()
         {
-            StopTimer();
-            StartTimer();
+            Stop();
+            Run();
         }
 
-        public void StartTimer()
+        public void Run()
         {
             if (!IsRunning)
             {
-                Timer.StopTimer();
-                Timer.Interval = TimeSpan.FromMilliseconds(Constants.milliSecondsInOneMinute / Tempo);
+                _timer.StopTimer();
+                _timer.Interval = TimeSpan.FromMilliseconds(Constants.milliSecondsInOneMinute / Tempo);
 
                 try
                 {
-                    Timer.StartTimer();
+                    _timer.StartTimer();
                 }
                 catch (Exception)
                 {
-                    throw new InvalidOperationException("Timer has not been started.");
+                    throw new InvalidOperationException("_timer has not been started.");
                 }
 
                 IsRunning = true;
             }
         }
 
-        public void StopTimer()
+        public void Stop()
         {
-            Timer.StopTimer();
+            _timer.StopTimer();
             IsRunning = false;
         }
 
-        private void MetronomeViewModel_MetronomeTick(object sender, EventArgs e)
+
+        #region PropertyChanged_BoilerPlate
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string prop = "")
         {
-            OnPropertyChanged(nameof(TickVisualization));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
-        private void MetronomeViewModel_SpeedTrainerTempoChanged(object sender, EventArgs e)
-        {
-            OnPropertyChanged(nameof(Tempo));
-        }
+        #endregion
     }
 }

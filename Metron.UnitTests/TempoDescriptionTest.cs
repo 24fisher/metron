@@ -5,25 +5,46 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Metron;
+using Metron.CoreLib;
 
 namespace Metron.UnitTests
 {
 
     [TestFixture]
-    class TempoDescritionTest
+    class TempoDescriptionTest
     {
-        //ITempoDescription tempoDescrition;
+        ITempoDescription tempoDescrition;
 
         [SetUp]
         public void Init()
         {
-           // tempoDescrition = new TempoDescritionXMLService();
+            tempoDescrition = new TempoDescriptionService(new WpfPlatformSpecificXmlDoc());
         }
 
         [Test]
-        public void tempoDescritionBasicTest()
+        public void Tempo_205_Should_return_prestissimo_TempoDescription()
         {
-           // Assert.AreEqual(tempoDescrition.GetTempoDescription(205), "prestissimo |");
+           Assert.AreEqual(tempoDescrition.GetTempoDescription(205), "prestissimo | ");
         }
+
+        [Test]
+        public void Tempo_69_Should_return_andantino_TempoDescription()
+        {
+            Assert.AreEqual(tempoDescrition.GetTempoDescription(86), "andantino | moderato assai | moderato | con moto | ");
+        }
+
+        [Test]
+        public void Tempo_minus10_Should_return_String_Empty_TempoDescription()
+        {
+            Assert.AreEqual(tempoDescrition.GetTempoDescription(-10), String.Empty);
+        }
+
+        [Test]
+        public void Tempo_1000_Should_return_String_Empty_TempoDescription()
+        {
+            Assert.AreEqual(tempoDescrition.GetTempoDescription(1000), String.Empty);
+        }
+
+
     }
 }

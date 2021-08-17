@@ -12,7 +12,7 @@ namespace MetronXamarin
 {
     public partial class MainPage : ContentPage
     {
-         MetronomeViewModel metronomeViewModel;
+         MetronomeModel metronomeModel;
         
 
         public MainPage()
@@ -21,18 +21,18 @@ namespace MetronXamarin
             buttonMetronomeStart.Clicked += ButtonMetronomeStart_Clicked;
             sliderTempo.ValueChanged += Slider_ValueChanged;
 
-            metronomeViewModel = new Metron.MetronomeViewModel(new XamarinAppBuilder());
-            this.BindingContext = metronomeViewModel;
+            metronomeModel = new Metron.MetronomeModel(new XamarinAppBuilder());
+            this.BindingContext = metronomeModel;
         }
 
         private void ButtonMetronomeStart_Clicked(object sender, EventArgs e)
         {
 
-            metronomeViewModel.Run(); 
+            metronomeModel.Run(); 
         }
         private void Slider_ValueChanged(object sender, EventArgs e)
         {
-            ((MetronomeViewModel)BindingContext)?.TempoSliderMoved();
+            ((MetronomeModel)BindingContext)?.RestartTimer();
         }
     }
 }

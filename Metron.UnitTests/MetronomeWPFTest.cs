@@ -19,19 +19,31 @@ namespace Metron.UnitTests
         [SetUp]
         public void Init()
         {
-            _metronModel = new MetronomeModel(new TimerWin32Adapted(), new WPFConsoleBeep(), new ColorWPF(), 250);
+            WpfAppBuilder wpfAppBuilder = new WpfAppBuilder()
+            {
+                ColorImplementor = new ColorWPF(),
+                SoundImplementor = new WPFAudioFileBeep(),
+                TimerImplementor = new TimerWin32Adapted(),
+                XmlDocImplementor = new WpfPlatformSpecificXmlDoc(),
+                metronomeHighLimit = 300,
+                metronomeLowLimit = 10
+
+            };
+            
+
+            _metronModel = new MetronomeModel(wpfAppBuilder);
         }
         [Test]
         public void ModelStartStopTest()
         {
             Assert.AreEqual(_metronModel.IsRunning, false);
 
-            _metronModel.StartTimer();
+            _metronModel.Run();
 
 
             Assert.AreEqual(_metronModel.IsRunning, true);
 
-            _metronModel.StopTimer();
+            _metronModel.Stop();
             Assert.AreEqual(_metronModel.IsRunning, false);
         }
         [Test]
@@ -39,7 +51,7 @@ namespace Metron.UnitTests
         {
             
             _metronModel.Tempo = 205;
-            //_metronModel.StartTimer();
+            //_metronModel.Run();
 
             //Thread.Sleep(500);
             Assert.AreEqual(_metronModel.Tempo, 205);
