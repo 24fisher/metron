@@ -65,6 +65,14 @@ namespace Metron
             get;
             set;
         }
+      
+
+        public string TickVisualization
+        {
+            get { return _tickVisualization; }
+            set { _tickVisualization = value; }
+        }
+
 
 
         public int Tempo
@@ -76,8 +84,7 @@ namespace Metron
                 {
                     _tempo = value;
                     OnPropertyChanged(nameof(Tempo));
-
-                    TempoDescription = _tempoDescriptionService.GetTempoDescriptionAsync(_tempo).Result;
+                    GetTempoDescription();
                     OnPropertyChanged(nameof(TempoDescription));
 
                 }
@@ -92,7 +99,11 @@ namespace Metron
             }
         }
 
-        
+        private async void GetTempoDescription()
+        {
+            TempoDescription = await _tempoDescriptionService.GetTempoDescriptionAsync(_tempo);
+        }
+
         public void RestartTimer()
         {
             if (IsRunning) ForceRestartTimer();
@@ -116,7 +127,7 @@ namespace Metron
 
             _tickVisualization = _color.GetColor(_metronomePattern.CurrentTickIndex % 2 == 0 ? "Red" : "Green");
 
-            OnPropertyChanged(nameof(_tickVisualization));
+            OnPropertyChanged(nameof(TickVisualization));
             _metronomePattern.NextTick();
         }
 
