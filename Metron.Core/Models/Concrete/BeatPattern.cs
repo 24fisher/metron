@@ -2,14 +2,14 @@
 
 namespace Metron
 {
-    public class Pattern
+    public class BeatPattern
     {
         private char[] _patternChars;
         private string _patternString;
         public EventHandler OnNextTaktHandler;
 
 
-        public Pattern(int currentTickIndex = 0, string patternString = "1000")
+        public BeatPattern(int currentTickIndex = 0, string patternString = "1000")
         {
             SetNewPatern(patternString);
             CurrentTickIndex = 0;

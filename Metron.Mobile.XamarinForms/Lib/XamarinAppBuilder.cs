@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Metron
 {
-    public class XamarinAppBuilder : IAppBuilder
+    public class XamarinMetronomeBuilder : IMetronomeBuilder
     {
 
-        public XamarinAppBuilder()
+        public XamarinMetronomeBuilder()
         {
             TimerImplementor = new TimerXamarin();
             SoundImplementor = new XamarinAudioFileBeep();
@@ -20,7 +20,42 @@ namespace Metron
         public IMetromomeSound SoundImplementor { get; set; }
         public IColor ColorImplementor { get; set; }
         public IPlatformSpecificXMLDoc XmlDocImplementor { get; set; }
-        public int metronomeLowLimit { get; set; }
-        public int metronomeHighLimit { get; set; }
+        public int MetronomeLowLimit { get; set; }
+        public int MetronomeHighLimit { get; set; }
+
+        public IMetronomeBuilder Create()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IMetronomeBuilder withColor(IColor colorImplementor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IMetronomeBuilder withHighLimit(int metronomeHighLimit)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IMetronomeBuilder withLowLimit(int metronomeLowLimit)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IMetronomeBuilder withPlatformSpecificXMLDoc(IPlatformSpecificXMLDoc xmlDocImplementor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IMetronomeBuilder withSound(IMetromomeSound soundImplementor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IMetronomeBuilder withTimer(ITimer timerImplementor)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

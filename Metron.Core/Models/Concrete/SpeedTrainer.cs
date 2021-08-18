@@ -5,16 +5,16 @@ using System.Text;
 
 namespace Metron
 {
-    class SpeedTrainer
+    public class SpeedTrainer
     {
-        private readonly int _bpmIncrease;
+        private readonly int _bpmIncreaseStep;
         private readonly int _taktsToEncreaseTempo;
 
         private int _currentTick = Constants.initialTick;
 
-        public SpeedTrainer(int bpmIncrease, int taktsToEncreaseTempo)
+        public SpeedTrainer(int bpmIncreaseStepStep, int taktsToEncreaseTempo)
         {
-            _bpmIncrease = bpmIncrease;
+            _bpmIncreaseStep = bpmIncreaseStepStep;
             _taktsToEncreaseTempo = taktsToEncreaseTempo;
         }
 
@@ -23,7 +23,7 @@ namespace Metron
             if (_currentTick == _taktsToEncreaseTempo)
             {
                 _currentTick = Constants.initialTick;
-                return currentTempo += _bpmIncrease;
+                return currentTempo += _bpmIncreaseStep;
             }
             else
             {

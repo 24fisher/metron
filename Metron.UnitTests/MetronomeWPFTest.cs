@@ -12,19 +12,14 @@ namespace Metron.UnitTests
         [SetUp]
         public void Init()
         {
-            WpfAppBuilder wpfAppBuilder = new WpfAppBuilder()
-            {
-                ColorImplementor = new ColorWPF(),
-                SoundImplementor = new WPFAudioFileBeep(),
-                TimerImplementor = new TimerWin32Adapted(),
-                XmlDocImplementor = new WpfPlatformSpecificXmlDoc(),
-                metronomeHighLimit = 300,
-                metronomeLowLimit = 10
 
-            };
-            
 
-            _metronModel = new MetronomeModel(wpfAppBuilder);
+            IMetronomeBuilder builder = new MetronomeBuilder(_metronModel);
+            IMetronomeDirector director = new WPFMetronomeDirector();
+            director.ConstructDefaultMetronomeModel();
+
+
+            _metronModel = new MetronomeModel();
         }
         [Test]
         public void ModelStartStopTest()

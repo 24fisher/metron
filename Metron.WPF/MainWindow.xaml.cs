@@ -27,9 +27,11 @@ namespace Metron
         {
             InitializeComponent();
 
-            DataContext = (IMetronomeModel)new MetronomeModel(new WpfAppBuilder());
+            IMetronomeBuilder builder = new MetronomeBuilder(new MetronomeModel());
+            IMetronomeDirector director = new WPFMetronomeDirector();
 
-            
+            DataContext = (IMetronomeModel)director.ConstructDefaultMetronomeModel();
+
             //Setting window position
             Left = MetronWPF.Properties.Settings.Default.WindowPosition.Left;
             Top = MetronWPF.Properties.Settings.Default.WindowPosition.Top;

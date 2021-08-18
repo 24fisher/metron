@@ -21,7 +21,7 @@ namespace MetronXamarin
             buttonMetronomeStart.Clicked += ButtonMetronomeStart_Clicked;
             sliderTempo.ValueChanged += Slider_ValueChanged;
 
-            metronomeModel = new Metron.MetronomeModel(new XamarinAppBuilder());
+            metronomeModel = new Metron.MetronomeModel(new XamarinMetronomeBuilder());
             this.BindingContext = metronomeModel;
         }
 

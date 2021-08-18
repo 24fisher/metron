@@ -82,10 +82,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Lib\ColorWPF.cs" />
-    <Compile Include="Lib\TimerNetFrameworkDispatcherTimer.cs" />
-    <Compile Include="Lib\TimerWin32Adapted.cs" />
-    <Compile Include="Lib\TimerNetFrameworkTimer.cs" />
-    <Compile Include="Lib\WpfAppBuilder.cs" />
+    <Compile Include="Lib\MetronomeDirector.cs" />
+    <Compile Include="Lib\Timers\TimerNetFrameworkDispatcherTimer.cs" />
+    <Compile Include="Lib\Timers\TimerWin32Adapted.cs" />
+    <Compile Include="Lib\Timers\TimerNetFrameworkTimer.cs" />
     <Compile Include="Lib\WPFAudioFileBeep.cs" />
     <Compile Include="Lib\WpfPlatformSpecificXmlDoc.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -95,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Lib\WPFConsoleBeep.cs" />
-    <Compile Include="Lib\TimerWin32Wrapper .cs" />
+    <Compile Include="Lib\Timers\TimerWin32Wrapper .cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -168,6 +168,7 @@
       <Name>Metron.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
