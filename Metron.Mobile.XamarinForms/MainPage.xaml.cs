@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Metron;
+using Metron.Mobile.XamarinForms.Lib;
 using Xamarin.Forms;
 
 
@@ -21,7 +22,11 @@ namespace MetronXamarin
             buttonMetronomeStart.Clicked += ButtonMetronomeStart_Clicked;
             sliderTempo.ValueChanged += Slider_ValueChanged;
 
-            metronomeModel = new Metron.MetronomeModel(new XamarinMetronomeBuilder());
+            IMetronomeBuilder builder = new MetronomeBuilder(new MetronomeModel());
+            XamarinMetronomeDirector director = new XamarinMetronomeDirector(builder);
+
+            metronomeModel = director.ConstructDefaultMetronomeModel();
+
             this.BindingContext = metronomeModel;
         }
 

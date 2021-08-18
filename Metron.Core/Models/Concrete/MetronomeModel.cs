@@ -7,10 +7,9 @@ namespace Metron
 {
     public class MetronomeModel : IMetronomeModel, INotifyPropertyChanged
     {
-        public ITempoDescription _tempoDescriptionService;
+        private string _measure;
         private int _tempo;
-
-
+        public ITempoDescription TempoDescriptionService { get; set; }
         public IMetromomeSound Beep { get; set; }
         public IColor Color { get; set; }
         public int MetronomeHighLimit { get; set; }
@@ -19,23 +18,16 @@ namespace Metron
         public SpeedTrainer Trainer { get; set; }
         public ITimer Timer { get; set; }
         public IPlatformSpecificXMLDoc XmlDocImplementor { get; set; }
-        private string _measure;
 
         public string Measure
         {
-
             get
             {
                 if (_measure != null)
-                {
                     return _measure;
-                }
-                else return "";
+                return "";
             }
-            set
-            {
-                _measure = value;
-            }
+            set => _measure = value;
         }
 
 
@@ -44,10 +36,8 @@ namespace Metron
             get
             {
                 if (MetronomeBeatPattern != null)
-                {
                     return MetronomeBeatPattern?.PatternString;
-                }
-                else return "";
+                return "";
             }
             set
             {
@@ -128,7 +118,7 @@ namespace Metron
 
         private async void GetTempoDescription()
         {
-            TempoDescription = await _tempoDescriptionService.GetTempoDescriptionAsync(_tempo);
+            TempoDescription = await TempoDescriptionService.GetTempoDescriptionAsync(_tempo);
         }
 
 

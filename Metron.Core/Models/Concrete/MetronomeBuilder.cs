@@ -43,7 +43,7 @@ namespace Metron
         public IMetronomeBuilder withPlatformSpecificXMLDoc(IPlatformSpecificXMLDoc xmlDocImplementor)
         {
             _model.XmlDocImplementor = xmlDocImplementor;
-            _model._tempoDescriptionService = new TempoDescriptionService(xmlDocImplementor);
+            _model.TempoDescriptionService = new TempoDescriptionService(xmlDocImplementor);
 
             return this;
         }
@@ -88,7 +88,7 @@ namespace Metron
             return this;
         }
 
-        public IMetronomeBuilder withSpeadTrainer(int bpmIncreaseStep = 1 , int taktsToIncreaseTempo = 8)
+        public IMetronomeBuilder withSpeedTrainer(int bpmIncreaseStep = 1 , int taktsToIncreaseTempo = 8)
         {
             _model.Trainer = new SpeedTrainer(bpmIncreaseStep, taktsToIncreaseTempo);
             return this;
@@ -98,10 +98,25 @@ namespace Metron
 
         public IMetronomeModel Build()
         {
-            withTempo();
-            withBeatPattern();
-            withTickVisualizationDefaultColor();
-            withSpeadTrainer();
+            if (_model.Tempo == 0)
+            {
+                withTempo();
+            }
+
+            if (string.IsNullOrEmpty(_model.Pattern))
+            {
+                withBeatPattern();
+            }
+
+            if (_model.TickVisualization == null)
+            {
+                withTickVisualizationDefaultColor();
+            }
+
+            if (_model.Trainer == null)
+            {
+                withSpeedTrainer();
+            }
 
             return _model;
         }

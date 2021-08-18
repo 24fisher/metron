@@ -28,9 +28,9 @@ namespace Metron
             InitializeComponent();
 
             IMetronomeBuilder builder = new MetronomeBuilder(new MetronomeModel());
-            IMetronomeDirector director = new WPFMetronomeDirector();
+            WPFMetronomeDirector director = new WPFMetronomeDirector(builder);
 
-            DataContext = (IMetronomeModel)director.ConstructDefaultMetronomeModel();
+            DataContext = director.ConstructDefaultMetronomeModel();
 
             //Setting window position
             Left = MetronWPF.Properties.Settings.Default.WindowPosition.Left;

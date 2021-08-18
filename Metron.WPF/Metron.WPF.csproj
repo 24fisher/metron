@@ -82,7 +82,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Lib\ColorWPF.cs" />
-    <Compile Include="Lib\MetronomeDirector.cs" />
+    <Compile Include="Lib\WPFMetronomeDirector.cs" />
     <Compile Include="Lib\Timers\TimerNetFrameworkDispatcherTimer.cs" />
     <Compile Include="Lib\Timers\TimerWin32Adapted.cs" />
     <Compile Include="Lib\Timers\TimerNetFrameworkTimer.cs" />
