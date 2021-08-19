@@ -6,9 +6,9 @@ using Metron.Core.Interfaces;
 
 namespace Metron.Core.Services
 {
-    public class TempoDescriptionService : ITempoDescription
+    public class TempoDescriptionServiceService : ITempoDescriptionService
     {
-        public TempoDescriptionService(IPlatformSpecificXMLDoc doc)
+        public TempoDescriptionServiceService(IPlatformSpecificXMLDoc doc)
         {
             PlatformSpecificXmlDoc = doc;
         }
@@ -46,10 +46,10 @@ namespace Metron.Core.Services
             return tempoDescription;
         }
 
-        async Task<string> ITempoDescription.GetTempoDescriptionAsync(int tempo)
+        async Task<string> ITempoDescriptionService.GetTempoDescriptionAsync(int tempo)
         {
 
-            return await Task<string>.Factory.StartNew(GetTempoDescription, tempo).ConfigureAwait(false);
+            return await Task.Run(() => GetTempoDescription(tempo)).ConfigureAwait(false);
         }
     }
 }

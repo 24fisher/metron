@@ -8,9 +8,9 @@ namespace Metron.Core.Models
 {
     public class MetronomeModel : IMetronomeModel, INotifyPropertyChanged
     {
-        private string _measure;
         private int _tempo;
-        public ITempoDescription TempoDescriptionService { get; set; }
+        public string Measure { get; }
+        public ITempoDescriptionService TempoDescriptionServiceService { get; set; }
         public IMetromomeSound SoundPlayer { get; set; }
         public IColor Color { get; set; }
         public int MetronomeHighLimit { get; set; }
@@ -19,17 +19,6 @@ namespace Metron.Core.Models
         public SpeedTrainer Trainer { get; set; }
         public ITimer Timer { get; set; }
         public IPlatformSpecificXMLDoc XmlDocImplementor { get; set; }
-
-        public string Measure
-        {
-            get
-            {
-                if (_measure != null)
-                    return _measure;
-                return "";
-            }
-            set => _measure = value;
-        }
 
 
         public string Pattern
@@ -72,7 +61,9 @@ namespace Metron.Core.Models
                 {
                     _tempo = value;
                     OnPropertyChanged(nameof(Tempo));
-                    GetTempoDescription();
+
+                    TempoDescriptionServiceService.GetTempoDescriptionAsync(_tempo);
+
                     OnPropertyChanged(nameof(TempoDescription));
                 }
                 else if (value < MetronomeLowLimit)
@@ -119,7 +110,7 @@ namespace Metron.Core.Models
 
         private async void GetTempoDescription()
         {
-            TempoDescription = await TempoDescriptionService.GetTempoDescriptionAsync(_tempo);
+            TempoDescription = await TempoDescriptionServiceService.GetTempoDescriptionAsync(_tempo);
         }
 
 
@@ -136,7 +127,6 @@ namespace Metron.Core.Models
                 SoundPlayer.PlayLowFreqSound();
                 TickVisualization = Color.GetColor("Green");
             }
-
 
             TickVisualization = Color.GetColor(MetronomeBeatPattern.CurrentTickIndex % 2 == 0 ? "Red" : "Green");
 

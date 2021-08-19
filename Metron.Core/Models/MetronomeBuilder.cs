@@ -37,7 +37,7 @@ namespace Metron.Core.Models
         public IMetronomeBuilder withPlatformSpecificXMLDoc(IPlatformSpecificXMLDoc xmlDocImplementor)
         {
             _model.XmlDocImplementor = xmlDocImplementor ?? throw new ArgumentNullException(nameof(xmlDocImplementor));
-            _model.TempoDescriptionService = new TempoDescriptionService(xmlDocImplementor);
+            _model.TempoDescriptionServiceService = new TempoDescriptionServiceService(xmlDocImplementor);
 
             return this;
         }
@@ -55,14 +55,12 @@ namespace Metron.Core.Models
             return this;
         }
 
-
         public IMetronomeModel Build()
         {
             ValidateModel();
 
             return _model;
         }
-
 
         public IMetronomeBuilder withTempo(int tempo)
         {
@@ -71,8 +69,7 @@ namespace Metron.Core.Models
 
             return this;
         }
-
-
+        
         public IMetronomeBuilder withBeatPattern(string patternString)
         {
             _model.MetronomeBeatPattern = new BeatPattern(0, patternString);

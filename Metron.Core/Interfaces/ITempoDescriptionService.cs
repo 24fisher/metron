@@ -2,7 +2,7 @@
 
 namespace Metron.Core.Interfaces
 {
-    public interface ITempoDescription
+    public interface ITempoDescriptionService
     {
 
         string GetTempoDescription(object tempo);

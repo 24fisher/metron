@@ -10,12 +10,12 @@ namespace Metron.UnitTests
     [TestFixture]
     class TempoDescriptionTest
     {
-        ITempoDescription tempoDescrition;
+        ITempoDescriptionService tempoDescrition;
 
         [SetUp]
         public void Init()
         {
-            tempoDescrition = new TempoDescriptionService(new WpfPlatformSpecificXmlDoc());
+            tempoDescrition = new TempoDescriptionServiceService(new WpfPlatformSpecificXmlDoc());
         }
 
         [Test]

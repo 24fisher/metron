@@ -15,7 +15,7 @@ namespace Metron.UnitTests
         [SetUp]
         public void Init()
         {
-
+            _metronModel = new MetronomeModel();
 
             IMetronomeBuilder builder = new MetronomeBuilder(_metronModel);
             IMetronomeDirector director = new WPFMetronomeDirector(builder);
@@ -23,7 +23,7 @@ namespace Metron.UnitTests
             director.ConstructDefaultMetronomeModel();
 
 
-            _metronModel = new MetronomeModel();
+            
         }
         [Test]
         public void ModelStartStopTest()
