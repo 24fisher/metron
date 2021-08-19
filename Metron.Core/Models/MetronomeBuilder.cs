@@ -64,8 +64,9 @@ namespace Metron.Core.Models
 
         public IMetronomeBuilder withTempo(int tempo)
         {
+            _model.TempoChanged += _model.MetronomeTempoChanged;
             _model.Tempo = tempo;
-
+            
 
             return this;
         }

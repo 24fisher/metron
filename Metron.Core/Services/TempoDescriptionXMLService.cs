@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Metron.Core.Interfaces;
@@ -43,6 +44,7 @@ namespace Metron.Core.Services
                     tempoDescription += item.Name + " | ";
                 }
             }
+            Thread.Sleep(2000);
             return tempoDescription;
         }
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 using Metron.Core.Data;
 using Metron.Core.Interfaces;
 
@@ -17,6 +19,7 @@ namespace Metron.Core.Models
         public int MetronomeLowLimit { get; set; }
         public BeatPattern MetronomeBeatPattern { get; set; }
         public SpeedTrainer Trainer { get; set; }
+        public event EventHandler TempoChanged;
         public ITimer Timer { get; set; }
         public IPlatformSpecificXMLDoc XmlDocImplementor { get; set; }
 
@@ -60,11 +63,11 @@ namespace Metron.Core.Models
                 if (value >= MetronomeLowLimit && value <= MetronomeHighLimit)
                 {
                     _tempo = value;
+
                     OnPropertyChanged(nameof(Tempo));
 
-                    TempoDescriptionServiceService.GetTempoDescriptionAsync(_tempo);
+                    TempoChanged?.Invoke(this, EventArgs.Empty);
 
-                    OnPropertyChanged(nameof(TempoDescription));
                 }
                 else if (value < MetronomeLowLimit)
                 {
@@ -75,6 +78,12 @@ namespace Metron.Core.Models
                     _tempo = MetronomeHighLimit;
                 }
             }
+        }
+
+        private async Task<string> GetTempoDescriptionAsync(int tempo)
+        {
+        
+            return await TempoDescriptionServiceService.GetTempoDescriptionAsync(tempo).ConfigureAwait(false);
         }
 
         public void RestartTimer()
@@ -108,11 +117,6 @@ namespace Metron.Core.Models
             IsRunning = false;
         }
 
-        private async void GetTempoDescription()
-        {
-            TempoDescription = await TempoDescriptionServiceService.GetTempoDescriptionAsync(_tempo);
-        }
-
 
         public void Metronome_Tick(object sender, EventArgs e)
         {
@@ -137,6 +141,14 @@ namespace Metron.Core.Models
         private TickTack GetCurrentTackOrTick()
         {
             return (TickTack)(int)char.GetNumericValue(MetronomeBeatPattern.CurrentTick);
+        }
+
+
+        public async void MetronomeTempoChanged(object sender, EventArgs e)
+        {
+            TempoDescription = await TempoDescriptionServiceService.GetTempoDescriptionAsync(_tempo).ConfigureAwait(false);
+
+            OnPropertyChanged(nameof(TempoDescription));
         }
 
         public void Metronome_OnNextTakt(object sender, EventArgs e)
