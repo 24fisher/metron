@@ -1,4 +1,5 @@
 ﻿using System;
+using Metron.Core.Data;
 
 namespace Metron.Core.Models
 {
@@ -9,10 +10,10 @@ namespace Metron.Core.Models
         public EventHandler OnNextTaktHandler;
 
 
-        public BeatPattern(int currentTickIndex = 0, string patternString = "1000")
+        public BeatPattern(int currentTickIndex, string patternString)
         {
             SetNewPatern(patternString);
-            CurrentTickIndex = 0;
+            CurrentTickIndex = currentTickIndex;
         }
 
         #region Indexer
@@ -29,11 +30,7 @@ namespace Metron.Core.Models
         public char CurrentTick { get; private set; }
         public int CurrentTickIndex { get; set; }
 
-        public string Measure
-        {
-            get; 
-            private set;
-        }
+        public string Measure { get; private set; }
 
         public string PatternString
         {
@@ -50,10 +47,12 @@ namespace Metron.Core.Models
         private void SetNewPatern(string patternString)
         {
             // Input checks
-            if (patternString == "") //Empty input string? => Setting default values
-                patternString = "1";
-            if (patternString.Length > 20) // Max string length is 20 => Trimming string; tick index default value
-                patternString = patternString.Substring(0, 20);
+            if (string.IsNullOrEmpty(patternString)) //Empty input string? => Setting default values
+                patternString = Constants.DefaultPatternString;
+            if (patternString.Length >
+                Constants
+                    .MaximumBeatPatternLength) // Max string length is Constants.MaximumBeatPatternLength => Trimming string; tick index default value
+                patternString = patternString.Substring(0, Constants.MaximumBeatPatternLength);
             _patternChars = patternString.ToCharArray();
             _patternString = patternString;
             SetMeasure();
@@ -71,7 +70,7 @@ namespace Metron.Core.Models
             {
                 CurrentTickIndex = 0;
                 CurrentTick = PatternString[0];
-                OnNextTaktHandler.Invoke(this, new EventArgs());
+                OnNextTaktHandler.Invoke(this, EventArgs.Empty);
             }
         }
     }

@@ -19,5 +19,7 @@
         public const int SpeedTrainerBpmIncreaseStep = 2;
 
         public const int SpeedTrainerTaktsToIncreaseTempo = 8;
+
+        public const int MaximumBeatPatternLength = 20;
     }
 }
