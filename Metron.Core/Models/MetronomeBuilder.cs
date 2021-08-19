@@ -23,7 +23,7 @@ namespace Metron.Core.Models
 
         public IMetronomeBuilder withSound(IMetromomeSound soundImplementor)
         {
-            _model.Beep = soundImplementor ?? throw new ArgumentNullException(nameof(soundImplementor));
+            _model.SoundPlayer = soundImplementor ?? throw new ArgumentNullException(nameof(soundImplementor));
             return this;
         }
 
@@ -50,14 +50,14 @@ namespace Metron.Core.Models
 
         public IMetronomeBuilder withLowLimit(int metronomeLowLimit)
         {
-            _model.MetronomeHighLimit = metronomeLowLimit;
+            _model.MetronomeLowLimit = metronomeLowLimit;
             return this;
         }
 
 
 
 
-        public IMetronomeBuilder withTempo(int tempo = Constants.InitialTempo)
+        public IMetronomeBuilder withTempo(int tempo)
         {
             _model.Tempo = tempo;
             
@@ -66,7 +66,7 @@ namespace Metron.Core.Models
         }
 
 
-        public IMetronomeBuilder withBeatPattern(string patternString = "1000")
+        public IMetronomeBuilder withBeatPattern(string patternString = Constants.DefaultPatternString)
         {
             _model.MetronomeBeatPattern = new BeatPattern(0, patternString);
             _model.MetronomeBeatPattern.OnNextTaktHandler += _model.Metronome_OnNextTakt;
@@ -91,9 +91,40 @@ namespace Metron.Core.Models
 
         public IMetronomeModel Build()
         {
+            ValidateModel();
+
+            return _model;
+        }
+
+
+        private void ValidateModel()
+        {
+            if(_model.Timer == null)
+                throw new ArgumentNullException(nameof(_model.Timer));
+
+            if (_model.SoundPlayer == null)
+                throw new ArgumentNullException(nameof(_model.SoundPlayer));
+
+            if (_model.Color == null)
+                throw new ArgumentNullException(nameof(_model.Color));
+
+            if (_model.XmlDocImplementor == null)
+                throw new ArgumentNullException(nameof(_model.XmlDocImplementor));
+
+
+            if (_model.MetronomeLowLimit == 0)
+            {
+                withLowLimit(Constants.DefaultTempoLowLimit);
+            }
+
+            if (_model.MetronomeHighLimit == 0)
+            {
+                withHighLimit(Constants.DefaultTempoHighLimit);
+            }
+
             if (_model.Tempo == 0)
             {
-                withTempo();
+                withTempo(Constants.InitialTempo);
             }
 
             if (string.IsNullOrEmpty(_model.Pattern))
@@ -110,10 +141,6 @@ namespace Metron.Core.Models
             {
                 withSpeedTrainer();
             }
-
-            return _model;
         }
-
-
     }
 }

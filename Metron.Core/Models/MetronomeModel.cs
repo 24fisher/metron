@@ -11,7 +11,7 @@ namespace Metron.Core.Models
         private string _measure;
         private int _tempo;
         public ITempoDescription TempoDescriptionService { get; set; }
-        public IMetromomeSound Beep { get; set; }
+        public IMetromomeSound SoundPlayer { get; set; }
         public IColor Color { get; set; }
         public int MetronomeHighLimit { get; set; }
         public int MetronomeLowLimit { get; set; }
@@ -50,7 +50,6 @@ namespace Metron.Core.Models
 
 
         public string TempoDescription { get; set; }
-
 
         public string TickVisualization { get; set; }
 
@@ -127,13 +126,13 @@ namespace Metron.Core.Models
         {
             if (GetCurrentTackOrTick() == TickTack.MetronomeTick)
             {
-                Beep.PlayHighFreqSound();
+                SoundPlayer.PlayHighFreqSound();
                 TickVisualization = Color.GetColor("Red");
             }
 
             if (GetCurrentTackOrTick() == TickTack.MetronomeTack)
             {
-                Beep.PlayLowFreqSound();
+                SoundPlayer.PlayLowFreqSound();
                 TickVisualization = Color.GetColor("Green");
             }
 

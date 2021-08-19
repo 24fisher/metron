@@ -20,8 +20,8 @@ namespace MetronWPF.Models
                 .withPlatformSpecificXMLDoc(new WpfPlatformSpecificXmlDoc())
                 .withSound(new WPFAudioFileBeep())
                 .withTimer(new TimerNetFrameworkDispatcherTimer())
-                .withLowLimit(10)
-                .withHighLimit(300)
+                .withLowLimit(5)
+                .withHighLimit(400)
                 .Build();
         }
 
