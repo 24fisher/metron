@@ -80,12 +80,6 @@ namespace Metron.Core.Models
             }
         }
 
-        private async Task<string> GetTempoDescriptionAsync(int tempo)
-        {
-        
-            return await TempoDescriptionServiceService.GetTempoDescriptionAsync(tempo).ConfigureAwait(false);
-        }
-
         public void RestartTimer()
         {
             if (IsRunning) ForceRestartTimer();
@@ -164,7 +158,7 @@ namespace Metron.Core.Models
 
                     if (temp != Tempo)
                     {
-                        // speed changed!
+                        // speed changed! 
                         ForceRestartTimer();
 
                         OnPropertyChanged(nameof(Tempo));
