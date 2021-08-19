@@ -1,5 +1,6 @@
 ﻿using System;
 using Metron.Core.Interfaces;
+using Metron.Core.Services;
 using MetronWPF.Models;
 using NUnit.Framework;
 

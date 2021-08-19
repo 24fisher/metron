@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
 using System.Linq;
-using System.IO;
-using System.ComponentModel;
-using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Metron.Core.Interfaces;
 
-namespace Metron
+namespace Metron.Core.Services
 {
     public class TempoDescriptionService : ITempoDescription
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using Metron.Core.Data;
 using Metron.Core.Interfaces;
+using Metron.Core.Services;
 
 namespace Metron.Core.Models
 {
