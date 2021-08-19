@@ -17,12 +17,7 @@ namespace Metron
             
             Assert.AreEqual(_beatPattern.PatternString, "1000");
         }
-        [Test] public void PaternIndxerTest()
-        {
-            _beatPattern = new BeatPattern(0, "1000");
 
-            Assert.AreEqual(_beatPattern.PatternString, "1000");
-        }
         [Test]
         public void PatternEmptyStringTest()
         {
