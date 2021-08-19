@@ -44,7 +44,7 @@ namespace Metron.Core.Services
                     tempoDescription += item.Name + " | ";
                 }
             }
-            Thread.Sleep(2000);
+
             return tempoDescription;
         }
 
