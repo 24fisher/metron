@@ -51,6 +51,7 @@ namespace Metron.Core.Models
 
         public string TempoDescription { get; set; }
 
+
         public string TickVisualization { get; set; }
 
         public bool IsRunning { get; internal set; }

@@ -5,15 +5,15 @@ using Metron.Core.Services;
 
 namespace Metron.Core.Models
 {
-    public class MetronomeBuilder: IMetronomeBuilder
+    public class MetronomeBuilder : IMetronomeBuilder
     {
-
-        private MetronomeModel _model;
+        private readonly MetronomeModel _model;
 
         public MetronomeBuilder(MetronomeModel model)
         {
             _model = model;
         }
+
         public IMetronomeBuilder withTimer(ITimer timerImplementor)
         {
             _model.Timer = timerImplementor ?? throw new ArgumentNullException(nameof(timerImplementor));
@@ -56,40 +56,6 @@ namespace Metron.Core.Models
         }
 
 
-
-
-        public IMetronomeBuilder withTempo(int tempo)
-        {
-            _model.Tempo = tempo;
-            
-
-            return this;
-        }
-
-
-        public IMetronomeBuilder withBeatPattern(string patternString = Constants.DefaultPatternString)
-        {
-            _model.MetronomeBeatPattern = new BeatPattern(0, patternString);
-            _model.MetronomeBeatPattern.OnNextTaktHandler += _model.Metronome_OnNextTakt;
-            return this;
-        }
-
-        
-
-        public IMetronomeBuilder withTickVisualizationDefaultColor(string color = "White")
-        {
-            _model.TickVisualization = _model.Color.GetColor(color);
-            return this;
-        }
-
-        public IMetronomeBuilder withSpeedTrainer(int bpmIncreaseStep = 1 , int taktsToIncreaseTempo = 8)
-        {
-            _model.Trainer = new SpeedTrainer(bpmIncreaseStep, taktsToIncreaseTempo);
-            return this;
-        }
-        
-
-
         public IMetronomeModel Build()
         {
             ValidateModel();
@@ -98,9 +64,39 @@ namespace Metron.Core.Models
         }
 
 
+        public IMetronomeBuilder withTempo(int tempo)
+        {
+            _model.Tempo = tempo;
+
+
+            return this;
+        }
+
+
+        public IMetronomeBuilder withBeatPattern(string patternString)
+        {
+            _model.MetronomeBeatPattern = new BeatPattern(0, patternString);
+            _model.MetronomeBeatPattern.OnNextTaktHandler += _model.Metronome_OnNextTakt;
+            return this;
+        }
+
+
+        public IMetronomeBuilder withTickVisualizationDefaultColor(string color)
+        {
+            _model.TickVisualization = _model.Color.GetColor(color);
+            return this;
+        }
+
+        public IMetronomeBuilder withSpeedTrainer(int bpmIncreaseStep, int taktsToIncreaseTempo)
+        {
+            _model.Trainer = new SpeedTrainer(bpmIncreaseStep, taktsToIncreaseTempo);
+            return this;
+        }
+
+
         private void ValidateModel()
         {
-            if(_model.Timer == null)
+            if (_model.Timer == null)
                 throw new ArgumentNullException(nameof(_model.Timer));
 
             if (_model.SoundPlayer == null)
@@ -113,35 +109,17 @@ namespace Metron.Core.Models
                 throw new ArgumentNullException(nameof(_model.XmlDocImplementor));
 
 
-            if (_model.MetronomeLowLimit == 0)
-            {
-                withLowLimit(Constants.DefaultTempoLowLimit);
-            }
+            if (_model.MetronomeLowLimit == 0) withLowLimit(Constants.DefaultTempoLowLimit);
 
-            if (_model.MetronomeHighLimit == 0)
-            {
-                withHighLimit(Constants.DefaultTempoHighLimit);
-            }
+            if (_model.MetronomeHighLimit == 0) withHighLimit(Constants.DefaultTempoHighLimit);
 
-            if (_model.Tempo == 0)
-            {
-                withTempo(Constants.InitialTempo);
-            }
+            if (_model.Tempo == 0) withTempo(Constants.InitialTempo);
 
-            if (string.IsNullOrEmpty(_model.Pattern))
-            {
-                withBeatPattern();
-            }
+            if (string.IsNullOrEmpty(_model.Pattern)) withBeatPattern(Constants.DefaultPatternString);
 
-            if (_model.TickVisualization == null)
-            {
-                withTickVisualizationDefaultColor();
-            }
+            if (_model.TickVisualization == null) withTickVisualizationDefaultColor(Constants.TickVisualizationDefaultColor);
 
-            if (_model.Trainer == null)
-            {
-                withSpeedTrainer();
-            }
+            if (_model.Trainer == null) withSpeedTrainer(Constants.SpeedTrainerBpmIncreaseStep, Constants.SpeedTrainerTaktsToIncreaseTempo);
         }
     }
 }

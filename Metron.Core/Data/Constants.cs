@@ -13,5 +13,11 @@
         public const int DefaultTempoHighLimit = 300;
 
         public const string DefaultPatternString = "1000";
+
+        public const string TickVisualizationDefaultColor = "White";
+
+        public const int SpeedTrainerBpmIncreaseStep = 2;
+
+        public const int SpeedTrainerTaktsToIncreaseTempo = 8;
     }
 }
