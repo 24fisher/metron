@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Lib\Services\**" />
-    <EmbeddedResource Remove="Lib\Services\**" />
-    <None Remove="Lib\Services\**" />
+    <Compile Remove="Models\Services\**" />
+    <EmbeddedResource Remove="Models\Services\**" />
+    <None Remove="Models\Services\**" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿using Metron.Core.Interfaces;
+using Metron.Core.Models;
+using MetronWPF.Models;
+using NUnit.Framework;
 
 namespace Metron.UnitTests
 {
@@ -15,7 +18,8 @@ namespace Metron.UnitTests
 
 
             IMetronomeBuilder builder = new MetronomeBuilder(_metronModel);
-            IMetronomeDirector director = new WPFMetronomeDirector();
+            IMetronomeDirector director = new WPFMetronomeDirector(builder);
+
             director.ConstructDefaultMetronomeModel();
 
 

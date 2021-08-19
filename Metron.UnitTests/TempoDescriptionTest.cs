@@ -1,4 +1,6 @@
 ﻿using System;
+using Metron.Core.Interfaces;
+using MetronWPF.Models;
 using NUnit.Framework;
 
 namespace Metron.UnitTests

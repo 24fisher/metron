@@ -7,6 +7,7 @@ using System.IO;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
+using Metron.Core.Interfaces;
 
 namespace Metron
 {

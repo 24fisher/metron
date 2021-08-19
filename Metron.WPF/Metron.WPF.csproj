@@ -81,21 +81,21 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Lib\ColorWPF.cs" />
-    <Compile Include="Lib\WPFMetronomeDirector.cs" />
-    <Compile Include="Lib\Timers\TimerNetFrameworkDispatcherTimer.cs" />
-    <Compile Include="Lib\Timers\TimerWin32Adapted.cs" />
-    <Compile Include="Lib\Timers\TimerNetFrameworkTimer.cs" />
-    <Compile Include="Lib\WPFAudioFileBeep.cs" />
-    <Compile Include="Lib\WpfPlatformSpecificXmlDoc.cs" />
+    <Compile Include="Models\ColorWPF.cs" />
+    <Compile Include="Models\WPFMetronomeDirector.cs" />
+    <Compile Include="Models\Timers\TimerNetFrameworkDispatcherTimer.cs" />
+    <Compile Include="Models\Timers\TimerWin32Adapted.cs" />
+    <Compile Include="Models\Timers\TimerNetFrameworkTimer.cs" />
+    <Compile Include="Models\WPFAudioFileBeep.cs" />
+    <Compile Include="Models\WpfPlatformSpecificXmlDoc.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Lib\WPFConsoleBeep.cs" />
-    <Compile Include="Lib\Timers\TimerWin32Wrapper .cs" />
+    <Compile Include="Models\WPFConsoleBeep.cs" />
+    <Compile Include="Models\Timers\TimerWin32Wrapper .cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

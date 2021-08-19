@@ -13,7 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
-
+using Metron.Core.Interfaces;
+using Metron.Core.Models;
+using MetronWPF.Models;
 
 
 namespace Metron

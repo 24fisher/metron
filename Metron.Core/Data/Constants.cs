@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Metron.Core.Structs
+﻿namespace Metron.Core.Data
 {
     public static class Constants
     {
-        public const int initialTempo = 100;
+        public const int InitialTempo = 100;
 
-        public const int milliSecondsInOneMinute = 60000;
+        public const int MilliSecondsInOneMinute = 60000;
 
-        public const int initialTick = 1;
+        public const int InitialTick = 1;
     }
 }

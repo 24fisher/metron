@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Metron;
-using Metron.Mobile.XamarinForms.Lib;
+using Metron.Core.Interfaces;
+using Metron.Core.Models;
+using Metron.Mobile.XamarinForms.Models;
 using Xamarin.Forms;
 
 
